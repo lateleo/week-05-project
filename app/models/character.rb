@@ -9,7 +9,7 @@ class Character < ActiveRecord::Base
                             # wit (integer),
                             # backstory (text, optional)
   # Has exactly one class, race, and racial_ability
-  
+
   validates :name, presence: {message: "cannot be blank."}
   # Age threshold set at 18 for now, will later redefine to age of adulthood for the given race
   validates :age, presence: {message: "cannot be blank."},
@@ -18,7 +18,7 @@ class Character < ActiveRecord::Base
     numericality: {greater_than: 0, message: "must be positive."}
   validates :stamina, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than: 0, message: "must be positive."}
-  validates :srength, presence: {message: "cannot be blank."},
+  validates :strength, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than: 0, message: "must be positive."}
   validates :agility, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than: 0, message: "must be positive."}
@@ -30,7 +30,7 @@ class Character < ActiveRecord::Base
   validates :race_id, presence: {message: "cannot be blank."}
   validates :racial_ability_id, presence: {message: "cannot be blank."}
 
-  belongs_to :class
+  belongs_to :base_class
   belongs_to :race
   belongs_to :racial_ability
   has_and_belongs_to_many :abilities
