@@ -1,7 +1,5 @@
 require "minitest/autorun"
 require "minitest/rg"
 require "sinatra/activerecord"
-require_relative "../app/models/book.rb"
-require_relative "../app/models/patron.rb"
-require_relative "../app/models/library.rb"
-require_relative "../app/models/staff_member.rb"
+
+Dir[File.dirname(__FILE__) + "../app/models/*.rb"].each { |file| require file}
