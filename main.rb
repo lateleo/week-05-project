@@ -9,6 +9,7 @@ set :views, Proc.new {File.join(root, "app/views/")}
 enable :method_override
 
 get "/" do
+  @page_name = "Home"
   erb :home
 end
 
