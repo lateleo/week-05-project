@@ -14,6 +14,7 @@ class PrestigeClass < ActiveRecord::Base
   validates :armor_type, presence: {message: "cannot be blank."}
   validates :primary_stat, presence: {message: "cannot be blank."}
   validates :seconardy_stat, presence: {message: "cannot be blank."}
+  validates :entry_requirements, presence: {message: "cannot be blank."}
 
   has_and_belongs_to_many :abilities
   has_and_belongs_to_many :characters

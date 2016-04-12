@@ -4,6 +4,7 @@ class RacialAbility < ActiveRecord::Base
   # Has one race
   validates :name, presence: {message: "cannot be blank."}
   validates :description, presence: {message: "cannot be blank."}
+  validates :race_id, presence: {message: "cannot be blank."}
 
   has_many :characters
   belongs_to :race

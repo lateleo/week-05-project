@@ -1,7 +1,7 @@
 class Race < ActiveRecord::Base
   # Non-relational attributes: name (string),
                               # age_of_adulthood (integer),
-                              # fortitude_index (integer),
+                              # stamina_index (integer),
                               # strength_index (integer),
                               # agility_index (integer),
                               # spell_power_index (integer),
