@@ -1,0 +1,27 @@
+<a href="/races"><< Back to Races Index</a>
+
+<h1>New Race</h1>
+
+<% if @race.errors.any? %>
+  <p><% @race.errors.full_messages.each do |m| %>
+    Error: <%= m %></br>
+    <% end %></p>
+<% end %>
+
+<form action="/races/new" method="post">
+  Name: <input type="text" name="name" value="<%= @race.name %>"></br>
+  Age of Adulthood: <input type="text" name="age_of_adulthood" value="<%= @race.age_of_adulthood %>"></br>
+  <% indices = {"Stamina" => "stamina_index",
+    "Strength" => "strength_index",
+    "Agility" => "agility_index",
+    "Spell Power" => "spell_power_index",
+    "Wit" => "wit_index"} %>
+  <% indices.each do |stat, index| %>
+    <%= stat %> Index: <% -3.step(to: 3) do |i| %>
+      <% i == @race.send(index).to_i ? checked = "checked" : checked = "" %>
+      <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>><%= i %>
+    <% end %></br>
+  <% end %>
+  Flavor Text: <input type="text" name="flavor_text" value="<%= @race.flavor_text %>"></br>
+  <input type="submit" value="Create New Race">
+</form>
