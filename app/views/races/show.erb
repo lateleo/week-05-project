@@ -50,20 +50,20 @@
             <% end %>
           </tbody>
         </table>
-  <% else %>
-    <p>
-      <em>(This race has no racial abilities entered.
-        <a href="/races/<%= @race.id %>/abilities/new">
-          Enter New Racial Ability Here
-        </a>.)
-      </em>
-    </p>
-  <% end %>
-
-  <p>
-    ( <a href="/races/<%= @race.id %>/edit">Edit Info</a> )
-  </p>
-
+      <% else %>
+        <p>
+          <em>(This race has no racial abilities entered.
+            <a href="/races/<%= @race.id %>/abilities/new">
+              Enter New Racial Ability Here
+            </a>.)
+          </em>
+        </p>
+      <% end %>
+      <p>
+        ( <a href="/races/<%= @race.id %>/edit">Edit Info</a> )
+      </p>
+    </div>
+  </div>
 <% else %>
   <h1>Error</h1>
   <p>

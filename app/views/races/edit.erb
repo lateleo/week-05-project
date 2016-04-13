@@ -1,31 +1,74 @@
-<% if @race %>
-  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
+<div class="container">
+  <% if @race %>
+  <a href="/races/<%= @race.id%>"><< Back to <%= @race.name %></a>
+
   <h1><%= @race.name %>: Edit Info</h1>
 
   <% if @race.errors.any? %>
     <p><% @race.errors.full_messages.each do |m| %>
       Error: <%= m %></br>
-    <% end %></p>
+      <% end %></p>
   <% end %>
 
-  <form action="/races/<%= @race.id %>/edit" method="post">
-    Name: <input type="text" name="name" value="<%= @race.name %>"></br>
-    Age of Adulthood: <input type="text" name="age_of_adulthood" value="<%= @race.age_of_adulthood %>"></br>
-    <% indices = {"Stamina" => "stamina_index",
-      "Strength" => "strength_index",
-      "Agility" => "agility_index",
-      "Spell Power" => "spell_power_index",
-      "Wit" => "wit_index"} %>
-    <% indices.each do |stat, index| %>
-      <%= stat %> Index: <% -3.step(to: 3) do |i| %>
-        <% i == @race.send(index).to_i ? checked = "checked" : checked = "" %>
-        <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>><%= i %>
-      <% end %></br>
-    <% end %>
-    Flavor Text:</br><textarea name="flavor_text" rows="10" cols="75"><%= @race.flavor_text %></textarea></br>
-    <input type="submit" value="Update Race">
+  <form class="form-horizontal" action="/races/<%= @race.id %>/edit" method="post">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name" class="col-md-4 control-label">Name:</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="name"
+                id="name" value="<%= @race.name %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="age_of_adulthood" class="col-md-4 control-label">Age of Adulthood:</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" name="age_of_adulthood"
+              id="age_of_adulthood" value="<%= @race.age_of_adulthood %>">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <p><b>Stat Indices:</b></p>
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @race.indices.each do |stat, index| %>
+              <tr>
+                <td><b><%= stat %>:</b></td>
+                <% -3.step(to: 3) do |i| %>
+                  <td>
+                    <% i == @race.send(index).to_i ? checked = "checked" : checked = "" %>
+                      <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>> <%= i %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <b>Flavor Text:</b>
+          <textarea name="flavor_text" rows="8" class="form-control"><%= @race.flavor_text %></textarea>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="submit" value="Update Race" class="btn btn-default">
+      </div>
+    </div>
   </form>
-<% else %>
-  <h1>Error</h1>
-  <p>No race with that ID exists.</p>
-<% end %>
+  <% else %>
+  <a href="/races"><< Back to Races Index</a>
+
+    <h1>Error</h1>
+    <p>
+      No race with that ID exists.
+    </p>
+  <% end %>
+</div>
