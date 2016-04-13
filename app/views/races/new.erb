@@ -22,6 +22,6 @@
       <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>><%= i %>
     <% end %></br>
   <% end %>
-  Flavor Text: <input type="text" name="flavor_text" value="<%= @race.flavor_text %>"></br>
+  Flavor Text:</br><textarea name="flavor_text" rows="10" cols="75"><%= @race.flavor_text %></textarea></br>
   <input type="submit" value="Create New Race">
 </form>

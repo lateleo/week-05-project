@@ -8,7 +8,8 @@ class Ability < ActiveRecord::Base
                               # effect_size (integer, set to 0 if effect_shape is "point")
                               # description (text)
   # Has and belongs to many characters, base_classes, and prestige_classes
-  validates :name, presence: {message: "cannot be blank."}
+  validates :name, presence: {message: "cannot be blank."},
+    uniqueness: {message: "must be unique."}
   validates :damage_type, presence: {message: "cannot be blank."}
   validates :base_damage, presence: {message: "cannot be blank."},
     numericality: {greater_than: 0, message: "must be positive."}

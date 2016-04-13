@@ -1,0 +1,20 @@
+<% if !@race %>
+  <a href="/races"><< Back to Races Index</a>
+  <h1>Error</h1>
+  <p>No race with that ID exists.</p>
+
+<% elsif !@racial_ability %>
+  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
+  <h1>Error</h1>
+  <p>No racial ability with that name exists for <%= @race.name %>.</p>
+
+<% else %>
+  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
+  <h1><%= @race.name %>: <%= @racial_ability.name %></h1>
+
+  <p>Cooldown: <%= @racial_ability.cooldown %></br>
+    In-Game Effect: <%= @racial_ability.in_game_effect %></br>
+    Flavor Text: <%= @racial_ability.flavor_text %></br>
+  </p>
+
+<% end %>

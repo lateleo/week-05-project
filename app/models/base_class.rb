@@ -7,7 +7,8 @@ class BaseClass < ActiveRecord::Base
                               # seconardy_stat (string),
                               # flavor_text (text, optional)
   # Has many abilities and characters
-  validates :name, presence: {message: "cannot be blank."}
+  validates :name, presence: {message: "cannot be blank."},
+    uniqueness: {message: "must be unique."}
   validates :range, presence: {message: "cannot be blank."}
   validates :role, presence: {message: "cannot be blank."}
   validates :armor_type, presence: {message: "cannot be blank."}

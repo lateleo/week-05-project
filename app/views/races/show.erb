@@ -1,0 +1,34 @@
+<a href="/races"><< Back to Races Index</a>
+
+<% if @race %>
+  <h1>Races: <%= @race.name %></h1>
+
+  <p>Age of Adulthood: <%= @race.age_of_adulthood %></p>
+    Stat Indices:
+      <li>Stamina: <%= @race.stamina_index %></li>
+      <li>Strength: <%= @race.strength_index %></li>
+      <li>Agility: <%= @race.agility_index %></li>
+      <li>Spell Power: <%= @race.spell_power_index %></li>
+      <li>Wit: <%= @race.wit_index %></li>
+    </p>
+
+  <% if @racial_abilities.any? %>
+    <p>Racial Abilities:</br>
+      <% @racial_abilities.each do |ability| %>
+        <li><a href="/races/<%= @race.id %>/abilities/<%= ability.name %>">
+          <%= ability.name %></a>: <%= ability.in_game_effect %></li>
+      <% end %>
+      <a href="/races/<%= @race.id %>/abilities/new">New Racial Ability</a></p>
+  <% else %>
+    <p><em>(This race has no racial abilities entered.
+      <a href="/races/<%= @race.id %>/abilities/new">Enter New Racial Ability Here</a>.)</em></p>
+  <% end %>
+
+  <p><em><%= @race.flavor_text %></em></p>
+
+  <p><a href="/races/<%= @race.id %>/edit">Edit Info</a></p>
+
+<% else %>
+  <h1>Error</h1>
+  <p>No race with that ID exists.</p>
+<% end %>

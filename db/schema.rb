@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 10) do
+ActiveRecord::Schema.define(version: 12) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,10 @@ ActiveRecord::Schema.define(version: 10) do
   create_table "racial_abilities", force: :cascade do |t|
     t.string  "name"
     t.integer "race_id"
-    t.text    "description"
+    t.text    "in_game_effect"
+    t.string  "cooldown"
+    t.text    "flavor_text"
+    t.string  "ability_id"
   end
 
 end
