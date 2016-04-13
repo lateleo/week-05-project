@@ -31,4 +31,12 @@ class Race < ActiveRecord::Base
     sum = stamina_index + strength_index + agility_index + spell_power_index + wit_index
     errors.add(:stat_indices, "must add up to 0.") if sum != 0
   end
+
+  def indices
+    indices = {"Stamina" => "stamina_index",
+              "Strength" => "strength_index",
+              "Agility" => "agility_index",
+              "Spell Power" => "spell_power_index",
+              "Wit" => "wit_index"}
+  end
 end
