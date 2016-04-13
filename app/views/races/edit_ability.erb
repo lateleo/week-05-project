@@ -1,0 +1,29 @@
+<% if !@race %>
+  <a href="/races"><< Back to Races Index</a>
+  <h1>Error</h1>
+  <p>No race with that ID exists.</p>
+
+<% elsif !@racial_ability %>
+  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
+  <h1>Error</h1>
+  <p>No racial ability with that name exists for <%= @race.name %>.</p>
+
+<% else %>
+  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
+  <h1><%= @race.name %>: <%= @racial_ability.name %> - Edit Info</h1>
+
+  <% if @racial_ability.errors.any? %>
+    <p><% @racial_ability.errors.full_messages.each do |m| %>
+      Error: <%= m %></br>
+    <% end %></p>
+  <% end %>
+
+  <form action="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit" method="post">
+    Name: <input type="text" name="name" value="<%= @racial_ability.name %>"></br>
+    Cooldown: <input type="text" name="cooldown" value="<%= @racial_ability.cooldown %>"></br>
+    In-Game Effect:</br><textarea name="in_game_effect" rows="10" cols="75"><%= @racial_ability.in_game_effect %></textarea></br>
+    Flavor Text:</br><textarea name="flavor_text" rows="10" cols="75"><%= @racial_ability.flavor_text %></textarea></br>
+    <input type="submit" value="Update Racial Ability">
+  </form>
+
+<% end %>

@@ -12,6 +12,8 @@
   <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
   <h1><%= @race.name %>: <%= @racial_ability.name %></h1>
 
+  <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit">
+    Edit Info</a>
   <p>Cooldown: <%= @racial_ability.cooldown %></br>
     In-Game Effect: <%= @racial_ability.in_game_effect %></br>
     Flavor Text: <%= @racial_ability.flavor_text %></br>

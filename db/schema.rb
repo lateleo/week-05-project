@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 12) do
+ActiveRecord::Schema.define(version: 13) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 12) do
     t.text    "in_game_effect"
     t.string  "cooldown"
     t.text    "flavor_text"
-    t.string  "ability_id"
+    t.string  "url_name"
   end
 
 end

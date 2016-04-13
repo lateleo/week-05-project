@@ -15,7 +15,7 @@
   <% if @racial_abilities.any? %>
     <p>Racial Abilities:</br>
       <% @racial_abilities.each do |ability| %>
-        <li><a href="/races/<%= @race.id %>/abilities/<%= ability.name %>">
+        <li><a href="/races/<%= @race.id %>/abilities/<%= ability.url_name %>">
           <%= ability.name %></a>: <%= ability.in_game_effect %></li>
       <% end %>
       <a href="/races/<%= @race.id %>/abilities/new">New Racial Ability</a></p>
