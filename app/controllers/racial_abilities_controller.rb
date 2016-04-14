@@ -2,14 +2,16 @@
 
 get "/races/:id/abilities/new" do
   @race = Race.find_by_id(params['id'])
-  @page_name = @race ? "#{@race.name}: New Racial Ability" : "Error"
+  redirect("/races/error") if !@race
+  @page_name = "#{@race.name}: New Racial Ability"
   @racial_ability = RacialAbility.new
   erb :"races/new_ability"
 end
 
 post "/races/:id/abilities/new" do
   @race = Race.find_by_id(params['id'])
-  @page_name = @race ? "#{@race.name}: New Racial Ability" : "Error"
+  redirect("/races/error") if !@race
+  @page_name = "#{@race.name}: New Racial Ability"
   @racial_ability = RacialAbility.new(name: params['name'],
                                       cooldown: params['cooldown'],
                                       in_game_effect: params['in_game_effect'],
@@ -18,29 +20,39 @@ post "/races/:id/abilities/new" do
   @racial_ability.save ? redirect("/races/#{@race.id}") : (erb :"races/new_ability")
 end
 
+get "/races/:id/abilities/error" do
+  @race = Race.find_by_id(params['id'])
+  @page_name = "Error: Racial Ability Not Found"
+  erb :"races/error_ability"
+end
+
 get "/races/:id/abilities/:url_name" do
   @race = Race.find_by_id(params['id'])
   @racial_ability = RacialAbility.find_by(race_id: params['id'], url_name: params['url_name'])
-  @page_name = (@race && @racial_ability) ? "#{@race.name}: #{@racial_ability.name}" : "Error"
+  !@race ? redirect("/races/error") : (redirect("/races/#{@race.id}/abilities/error") if !@racial_ability)
+  @page_name = "#{@race.name}: #{@racial_ability.name}"
   erb :"races/show_ability"
 end
 
 get "/races/:id/abilities/:url_name/edit" do
   @race = Race.find_by_id(params['id'])
   @racial_ability = RacialAbility.find_by(race_id: params['id'], url_name: params['url_name'])
-  @page_name = (@race && @racial_ability) ? "#{@racial_ability.name} - Edit Info" : "Error"
+  !@race ? redirect("/races/error") : (redirect("/races/#{@race.id}/abilities/error") if !@racial_ability)
+  @page_name = "#{@racial_ability.name} - Edit Info"
   erb :"races/edit_ability"
 end
 
 post "/races/:id/abilities/:url_name/edit" do
   @race = Race.find_by_id(params['id'])
   @racial_ability = RacialAbility.find_by(race_id: params['id'], url_name: params['url_name'])
-  @page_name = (@race && @racial_ability) ? "#{@racial_ability.name} - Edit Info" : "Error"
-  @racial_ability.update_attributes(name: params['name'],
+  !@race ? redirect("/races/error") : (redirect("/races/#{@race.id}/abilities/error") if !@racial_ability)
+  @page_name = "#{@racial_ability.name} - Edit Info"
+  @racial_ability.update_attributes(
+                                    name: params['name'],
                                     cooldown: params['cooldown'],
                                     in_game_effect: params['in_game_effect'],
-                                    flavor_text: params['flavor_text']) ?
-  redirect("/races/#{@race.id}/abilities/#{@racial_ability.url_name}") : (erb :"races/edit_ability")
+                                    flavor_text: params['flavor_text']
+    ) ? redirect("/races/#{@race.id}/abilities/#{@racial_ability.url_name}") : (erb :"races/edit_ability")
 end
 
 
