@@ -10,6 +10,9 @@ class PrestigeClass < ActiveRecord::Base
                               # entry_requirements (text),
                               # flavor_text (text, optional)
   # Has many abilities and characters
+  validates_with UniversalValidator
+  validates :role, presence: {message: "cannot be blank."}
+  validates :armor_type, presence: {message: "cannot be blank."}
   validates :stamina_index, numericality:
     {greater_than_or_equal_to: 0, less_than_or_equal_to: 3, message: "must be between 0 and 3, inclusive."}
   validates :strength_index, numericality:
