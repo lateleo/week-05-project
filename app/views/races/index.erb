@@ -1,24 +1,24 @@
 <div class="container">
-<a href="/"><< Back to Main Index</a>
-<h1>Races Index</h1>
+  <a href="/"><< Back to Main Index</a>
+  <h1>Races Index</h1>
 
-<p>
-  <% if @races.any? %>
-    <div class="row">
-      <div class="col-md-6">
-        <ul>
-          <% @races.each do |race| %>
-            <li>
-              <a href="/races/<%= race.id %>"><%= race.name %></a>
-            </li>
-          <% end %>
-        </ul>
+  <p>
+    <% if @races.any? %>
+      <div class="row">
+        <div class="col-md-6">
+          <ul>
+            <% @races.each do |race| %>
+              <li>
+                <a href="/races/<%= race.id %>"><%= race.name %></a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
-  <% else %>
-    <em>(No races have been created.)</em>
-  <% end %>
-</p>
+    <% else %>
+      <em>(No races have been created.)</em>
+    <% end %>
+  </p>
 
   <a href="/races/new">New Race</a>
 </div>

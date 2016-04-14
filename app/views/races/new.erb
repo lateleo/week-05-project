@@ -1,66 +1,74 @@
 <div class="container">
-<a href="/races"><< Back to Races Index</a>
+  <a href="/races"><< Back to Races Index</a>
 
-<h1>New Race</h1>
+  <h1>New Race</h1>
 
-<% if @race.errors.any? %>
-  <p><% @race.errors.full_messages.each do |m| %>
-    Error: <%= m %></br>
-    <% end %></p>
-<% end %>
+  <% if @race.errors.any? %>
+    <p><% @race.errors.full_messages.each do |m| %>
+      Error: <%= m %></br>
+      <% end %></p>
+  <% end %>
 
-<form class="form-horizontal" action="/races/new" method="post">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="name" class="col-md-4 control-label">Name:</label>
-        <div class="col-md-8">
-          <input type="text" class="form-control" name="name"
-              id="name" value="<%= @race.name %>">
+  <form class="form-horizontal" action="/races/new" method="post">
+
+    <%#= Name and Age of Adulthood %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name" class="col-md-4 control-label">Name:</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="name"
+                id="name" value="<%= @race.name %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="age_of_adulthood" class="col-md-4 control-label">Age of Adulthood:</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" name="age_of_adulthood"
+              id="age_of_adulthood" value="<%= @race.age_of_adulthood %>">
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="age_of_adulthood" class="col-md-4 control-label">Age of Adulthood:</label>
-        <div class="col-md-2">
-          <input type="text" class="form-control" name="age_of_adulthood"
-            id="age_of_adulthood" value="<%= @race.age_of_adulthood %>">
-        </div>
+    </div>
+
+    <%#= Stat indices %>
+    <div class="row">
+      <div class="col-md-4">
+        <p><b>Stat Indices:</b></p>
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @race.indices.each do |stat, index| %>
+              <tr>
+                <td><b><%= stat %>:</b></td>
+                <% -3.step(to: 3) do |i| %>
+                  <td>
+                    <% i == @race.send(index).to_i ? checked = "checked" : checked = "" %>
+                      <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>> <%= i %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-5">
-      <p><b>Stat Indices:</b></p>
-      <table class="table table-striped table-condensed">
-        <tbody>
-          <% @race.indices.each do |stat, index| %>
-            <tr>
-              <td><b><%= stat %>:</b></td>
-              <% -3.step(to: 3) do |i| %>
-                <td>
-                  <% i == @race.send(index).to_i ? checked = "checked" : checked = "" %>
-                    <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>> <%= i %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <%#= Flavor Text %>
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <b>Flavor Text:</b>
+          <textarea name="flavor_text" rows="8" class="form-control"><%= @race.flavor_text %></textarea>
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <p>
-        <b>Flavor Text:</b>
-        <textarea name="flavor_text" rows="8" class="form-control"><%= @race.flavor_text %></textarea>
-      </p>
+
+    <%#= Submit Button %>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="submit" value="Create New Race" class="btn btn-default">
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <input type="submit" value="Create New Race" class="btn btn-default">
-    </div>
-  </div>
-</form>
+
+  </form>
 </div>

@@ -1,57 +1,72 @@
 <div class="container">
-<% if !@race %>
-  <a href="/races"><< Back to Races Index</a>
-  <h1>Error</h1>
-  <p>No race with that ID exists.</p>
+  <% if @race && @racial_ability %>
 
-<% elsif !@racial_ability %>
-  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
-  <h1>Error</h1>
-  <p>No racial ability with that name exists for <%= @race.name %>.</p>
+    <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>">
+      << Back to <%= @racial_ability.name %></a>
 
-<% else %>
-  <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>"><< Back to <%= @racial_ability.name %></a>
-  <h1><%= @racial_ability.name %> - Edit Info</h1>
+    <h1><%= @racial_ability.name %> - Edit Info</h1>
 
-  <% if @racial_ability.errors.any? %>
-    <p><% @racial_ability.errors.full_messages.each do |m| %>
-      Error: <%= m %></br>
-    <% end %></p>
+    <% if @racial_ability.errors.any? %>
+      <p><% @racial_ability.errors.full_messages.each do |m| %>
+        Error: <%= m %></br>
+      <% end %></p>
+    <% end %>
+
+    <form class="form-horizontal", method="post",
+      action="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit">
+
+      <%#= Name and Cooldown %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name" class="col-md-4 control-label">Name:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="name"
+                  id="name" value="<%= @racial_ability.name %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cooldown" class="col-md-4 control-label">Cooldown:</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="cooldown"
+                id="cooldown" value="<%= @racial_ability.cooldown %>">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%#= In-Game Effect and Flavor Text %>
+      <div class="row">
+        <div class="col-md-6">
+          <p><b>In-Game Effect:</b>
+          <textarea name="in_game_effect" rows="8" class="form-control"><%= @racial_ability.in_game_effect %></textarea></p>
+          <p><b>Flavor Text:</b>
+          <textarea name="flavor_text" rows="8" class="form-control"><%= @racial_ability.flavor_text %></textarea></p>
+        </div>
+      </div>
+
+      <%#= Submit Button %>
+      <div class="row">
+        <div class="col-md-6">
+          <input type="submit" value="Update Ability" class="btn btn-default">
+        </div>
+      </div>
+
+    </form>
+
+  <% elsif !@race %>
+    <%#= Only happens when the user enters a non-existent race id in the URL,
+    shouldn't happen when following links normally.%>
+
+    <a href="/races"><< Back to Races Index</a>
+
+    <h1>Error</h1>
+    <p>No race with that ID exists.</p>
+
+  <% else %>
+    <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
+    <h1>Error</h1>
+    <p>No racial ability with that name exists for <%= @race.name %>.</p>
+
   <% end %>
-
-  <form class="form-horizontal" action="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit" method="post">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name" class="col-md-4 control-label">Name:</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control" name="name"
-                id="name" value="<%= @racial_ability.name %>">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="cooldown" class="col-md-4 control-label">Cooldown:</label>
-          <div class="col-md-4">
-            <input type="text" class="form-control" name="cooldown"
-              id="cooldown" value="<%= @racial_ability.cooldown %>">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <p><b>In-Game Effect:</b>
-        <textarea name="in_game_effect" rows="8" class="form-control"><%= @racial_ability.in_game_effect %></textarea></p>
-        <p><b>Flavor Text:</b>
-        <textarea name="flavor_text" rows="8" class="form-control"><%= @racial_ability.flavor_text %></textarea></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="submit" value="Update Ability" class="btn btn-default">
-      </div>
-    </div>
-  </form>
-
-<% end %>
 </div>

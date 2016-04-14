@@ -1,9 +1,10 @@
 <div class="container">
-<a href="/races"><< Back to Races Index</a>
+  <a href="/races"><< Back to Races Index</a>
 
-<% if @race %>
-  <h1>Races: <%= @race.name %></h1>
+  <% if @race %>
+    <h1>Races: <%= @race.name %></h1>
 
+    <%#= Flavor Text %>
     <div class="row">
       <div class="col-md-6">
         <p>
@@ -11,6 +12,8 @@
         </p>
       </div>
     </div>
+
+    <%#= Age of Adulthood and Stat Indices %>
     <div class="row">
       <div class="col-md-2">
         <p><b>Age of Adulthood:</b> <%= @race.age_of_adulthood %></p>
@@ -28,46 +31,50 @@
       </div>
     </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <% if @racial_abilities.any? %>
+    <%#= Racial Abilities %>
+    <div class="row">
+      <div class="col-md-6">
+        <% if @racial_abilities.any? %>
+          <p>
+            <b>Racial Abilities (</b>
+              <a href="/races/<%= @race.id %>/abilities/new">New</a>
+            <b>):</b>
+          </p>
+          <table class="table table-striped table-condensed">
+            <tbody>
+              <% @racial_abilities.each do |ability| %>
+                <tr>
+                  <td>
+                    <a href="/races/<%= @race.id %>/abilities/<%= ability.url_name %>">
+                      <%= ability.name %>
+                    </a>
+                  </td>
+                  <td><%= ability.in_game_effect %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>
+            <em>(This race has no racial abilities entered.
+              <a href="/races/<%= @race.id %>/abilities/new">
+                Enter New Racial Ability Here
+              </a>.)
+            </em>
+          </p>
+        <% end %>
         <p>
-          <b>Racial Abilities (</b>
-            <a href="/races/<%= @race.id %>/abilities/new">New</a>
-          <b>):</b>
+          ( <a href="/races/<%= @race.id %>/edit">Edit Info</a> )
         </p>
-        <table class="table table-striped table-condensed">
-          <tbody>
-            <% @racial_abilities.each do |ability| %>
-              <tr>
-                <td>
-                  <a href="/races/<%= @race.id %>/abilities/<%= ability.url_name %>">
-                    <%= ability.name %>
-                  </a>
-                </td>
-                <td><%= ability.in_game_effect %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        <p>
-          <em>(This race has no racial abilities entered.
-            <a href="/races/<%= @race.id %>/abilities/new">
-              Enter New Racial Ability Here
-            </a>.)
-          </em>
-        </p>
-      <% end %>
-      <p>
-        ( <a href="/races/<%= @race.id %>/edit">Edit Info</a> )
-      </p>
+      </div>
     </div>
-  </div>
-<% else %>
-  <h1>Error</h1>
-  <p>
-    No race with that ID exists.
-  </p>
-<% end %>
+
+  <% else %>
+    <%#= Only happens when the user enters a non-existent race id in the URL,
+    shouldn't happen when following links normally.%>
+    <h1>Error</h1>
+    <p>
+      No race with that ID exists.
+    </p>
+  <% end %>
 </div>
