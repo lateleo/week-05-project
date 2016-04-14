@@ -2,6 +2,11 @@ class BaseClass < ActiveRecord::Base
   # Non-relational Attributes: name (string),
                               # role (string),
                               # armor_type (string)
+                              # stamina_index (integer),
+                              # strength_index (integer),
+                              # agility_index (integer),
+                              # spell_power_index (integer),
+                              # wit_index (integer),
                               # flavor_text (text, optional)
   # Has many abilities and characters
   validates :name, presence: {message: "cannot be blank."},
