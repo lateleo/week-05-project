@@ -6,6 +6,7 @@ class UniversalValidator < ActiveModel::Validator
       #{model.gsub(/(?<=\p{L})(\p{Lu})/, " #{$1}")} with the name '#{record.name}'."
     else
       "Name cannot be blank."
+    end
   end
 
   def validate(record)
