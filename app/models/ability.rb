@@ -1,6 +1,5 @@
 
 class Ability < ActiveRecord::Base
-
   # Non-relational Attributes: name (string)
                               # description (text)
   # Has and belongs to many characters, base_classes, and prestige_classes

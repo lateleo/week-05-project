@@ -5,8 +5,7 @@ class RacialAbility < ActiveRecord::Base
                               # flavor_text (text, optional)
   # Has many characters
   # Has one race, and an url_name, which is derived from the name
-  include ActiveModel::Validations
-  validates_with UniversalValidator
+#  validates_with UniversalValidator
   validates :cooldown, presence: {message: "cannot be blank."}
   validates :in_game_effect, presence: {message: "cannot be blank."}
   validates :race_id, presence: {message: "cannot be blank."}
