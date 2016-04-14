@@ -1,7 +1,8 @@
 class Character < ActiveRecord::Base
   # Non-relational Attributes: name (string),
                             # age (integer),
-                            # level (integer, default is 1),
+                            # base_level (integer, 1 or greater),
+                            # character_level (integer, greater than or equal to base_level)
                             # stamina (integer),
                             # strength (integer),
                             # agility (integer),
@@ -14,7 +15,7 @@ class Character < ActiveRecord::Base
   # Age threshold set at 18 for now, will later redefine to age of adulthood for the given race
   validates :age, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than_or_equal_to: 18, message: "must be an adult."}
-  validates :level, presence: {message: "cannot be blank."},
+  validates :base_level, presence: {message: "cannot be blank."},
     numericality: {greater_than: 0, message: "must be positive."}
   validates :stamina, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than: 0, message: "must be positive."}
@@ -29,11 +30,17 @@ class Character < ActiveRecord::Base
   validates :class_id, presence: {message: "cannot be blank."}
   validates :race_id, presence: {message: "cannot be blank."}
   validates :racial_ability_id, presence: {message: "cannot be blank."}
+  before_validation :set_character_level
 
   belongs_to :base_class
   belongs_to :race
   belongs_to :racial_ability
+  has_many :prestige_levels
+  has_many :prestige_classes, through: :prestige_levels
   has_and_belongs_to_many :abilities
-  has_and_belongs_to_many :prestige_classes
 
+  def set_character_level
+    self.character_level = base_level
+    self.prestige_levels.each { |prestige_level| self.character_level += prestige_level.levels}
+  end
 end
