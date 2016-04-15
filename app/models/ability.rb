@@ -1,4 +1,3 @@
-
 class Ability < ActiveRecord::Base
   # Non-relational Attributes: name (string)
                               # description (text)

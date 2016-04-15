@@ -9,7 +9,7 @@ class BaseClass < ActiveRecord::Base
                               # wit_index (integer),
                               # flavor_text (text, optional)
   # Has many abilities and characters
-  validates_with UniversalValidator
+#  validates_with UniversalValidator
   validates :role, presence: {message: "cannot be blank."}
   validates :armor_type, presence: {message: "cannot be blank."}
   validates :stamina_index, numericality:
