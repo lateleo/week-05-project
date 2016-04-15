@@ -8,7 +8,7 @@ class Race < ActiveRecord::Base
                               # wit_index (integer),
                               # flavor_text (text, optional)
   # Has many characters and racial_abilities
-#  validates_with UniversalValidator
+  validates_with UniversalValidator
   validates :age_of_adulthood, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than_or_equal_to: 0, message: "must be positive."}
   validates :stamina_index, numericality:

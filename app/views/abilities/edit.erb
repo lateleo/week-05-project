@@ -47,7 +47,7 @@
     <%#= Submit Button %>
     <div class="row">
       <div class="col-md-6">
-        <input type="submit" value="Update Ability" class="btn btn-default">
+        <input type="submit" value="Update <%= Ability.find_by_id(@ability.id).name %>" class="btn btn-default">
       </div>
     </div>
 

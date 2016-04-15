@@ -1,0 +1,31 @@
+<div class="container">
+  <a href="/"><< Back to Main Index</a>
+  <h1>Base Class Index</h1>
+
+  <p>
+    <% if @base_classes.any? %>
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-striped table-condensed">
+            <tbody>
+              <% @base_classes.each do |base_class| %>
+                <tr>
+                  <td>
+                    <a href="/base_classes/<%= base_class.id %>">
+                      <%= base_class.name %>
+                    </a>
+                  </td>
+                  <td><%= base_class.flavor_text %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% else %>
+      <em>(No Base Classes have been created.)</em>
+    <% end %>
+  </p>
+
+  <a href="/base_classes/new">New Base Class</a>
+</div>

@@ -12,7 +12,7 @@ class Character < ActiveRecord::Base
   # Has exactly one class, race, and racial_ability
 
   # Age threshold set at 18 for now, will later redefine to age of adulthood for the given race
-#  validates_with UniversalValidator
+  validates_with UniversalValidator
   validates :age, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than_or_equal_to: 18, message: "must be an adult."}
   validates :base_level, presence: {message: "cannot be blank."},

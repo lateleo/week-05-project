@@ -1,0 +1,69 @@
+<div class="container">
+  <a href="/base_classes"><< Back to Base Classes Index</a>
+
+  <h1>Base Classes: <%= @base_class.name %></h1>
+
+  <%#= Flavor Text %>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        <em><%= @base_class.flavor_text %></em>
+      </p>
+    </div>
+  </div>
+
+  <%#= Role, Armor Type and Stat Indices %>
+  <div class="row">
+    <div class="col-md-2">
+      <p><b>Role:</b> <%= @base_class.role %></p>
+      <p><b>Armor Type:</b> <%= @base_class.armor_type %></p>
+      <p><b>Stat Indices:</b></p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <% @base_class.indices.each do |stat, index| %>
+            <tr>
+              <td><%= stat %>:</td>
+              <td class="text-right"><%= @base_class.send(index) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <p>( <a href="/base_classes/<%= @base_class.id %>/edit">Edit Info</a> )</p>
+    </div>
+  </div>
+
+  <%#= Abilities %>
+  <div class="row">
+    <div class="col-md-10">
+      <p>
+        <b>Abilities (</b>
+          <a href="/base_classes/<%= @base_class.id %>/edit_abilities">Add/Remove</a>
+        <b>):</b>
+      </p>
+      <% if @abilities.any? %>
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @abilities.each do |ability| %>
+              <tr>
+                <td>
+                  <a href="/abilities/<%= ability.id %>">
+                    <%= ability.name %>
+                  </a>
+                </td>
+                <td><%= ability.in_game_effect %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p><em>There are no abilites available for <%= @base_class.name %>.</em></p>
+      <% end %>
+    </div>
+  </div>
+
+</div>

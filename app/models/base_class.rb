@@ -9,7 +9,7 @@ class BaseClass < ActiveRecord::Base
                               # wit_index (integer),
                               # flavor_text (text, optional)
   # Has many abilities and characters
-#  validates_with UniversalValidator
+  validates_with UniversalValidator
   validates :role, presence: {message: "cannot be blank."}
   validates :armor_type, presence: {message: "cannot be blank."}
   validates :stamina_index, numericality:
@@ -25,5 +25,13 @@ class BaseClass < ActiveRecord::Base
 
   has_and_belongs_to_many :abilities
   has_many :characters
+
+  def indices
+    indices = {"Stamina" => "stamina_index",
+              "Strength" => "strength_index",
+              "Agility" => "agility_index",
+              "Spell Power" => "spell_power_index",
+              "Wit" => "wit_index"}
+  end
 
 end
