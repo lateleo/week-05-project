@@ -1,18 +1,18 @@
 <div class="container">
 
-  <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>">
-    << Back to <%= RacialAbility.find_by_id(@racial_ability.id).name %></a>
+  <a href="/abilities/<%= @ability.id %>">
+    << Back to <%= Ability.find_by_id(@ability.id).name %></a>
 
-  <h1><%= RacialAbility.find_by_id(@racial_ability.id).name %> - Edit Info</h1>
+  <h1><%= Ability.find_by_id(@ability.id).name %> - Edit Info</h1>
 
-  <% if @racial_ability.errors.any? %>
-    <p><% @racial_ability.errors.full_messages.each do |m| %>
+  <% if @ability.errors.any? %>
+    <p><% @ability.errors.full_messages.each do |m| %>
       Error: <%= m %></br>
     <% end %></p>
   <% end %>
 
   <form class="form-horizontal", method="post",
-    action="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit">
+    action="/abilities/<%= @ability.id %>/edit">
 
     <%#= Name and Cooldown %>
     <div class="row">
@@ -21,14 +21,14 @@
           <label for="name" class="col-md-4 control-label">Name:</label>
           <div class="col-md-8">
             <input type="text" class="form-control" name="name"
-                id="name" value="<%= @racial_ability.name %>">
+                id="name" value="<%= @ability.name %>">
           </div>
         </div>
         <div class="form-group">
           <label for="cooldown" class="col-md-4 control-label">Cooldown:</label>
           <div class="col-md-4">
             <input type="text" class="form-control" name="cooldown"
-              id="cooldown" value="<%= @racial_ability.cooldown %>">
+              id="cooldown" value="<%= @ability.cooldown %>">
           </div>
         </div>
       </div>
@@ -38,9 +38,9 @@
     <div class="row">
       <div class="col-md-6">
         <p><b>In-Game Effect:</b>
-        <textarea name="in_game_effect" rows="8" class="form-control"><%= @racial_ability.in_game_effect %></textarea></p>
+        <textarea name="in_game_effect" rows="8" class="form-control"><%= @ability.in_game_effect %></textarea></p>
         <p><b>Flavor Text:</b>
-        <textarea name="flavor_text" rows="8" class="form-control"><%= @racial_ability.flavor_text %></textarea></p>
+        <textarea name="flavor_text" rows="8" class="form-control"><%= @ability.flavor_text %></textarea></p>
       </div>
     </div>
 

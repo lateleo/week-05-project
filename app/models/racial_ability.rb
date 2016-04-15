@@ -4,7 +4,7 @@ class RacialAbility < ActiveRecord::Base
                               # in_game_effect (text),
                               # flavor_text (text, optional)
   # Has many characters
-  # Has one race, and an url_name, which is derived from the name
+  # Has one race, and a url_name, which is derived from the name
 #  validates_with UniversalValidator
   validates :cooldown, presence: {message: "cannot be blank."}
   validates :in_game_effect, presence: {message: "cannot be blank."}

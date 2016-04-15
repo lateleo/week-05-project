@@ -1,7 +1,7 @@
 <div class="container">
-  <a href="/races/<%= @race.id%>"><< Back to <%= @race.name %></a>
+  <a href="/races/<%= @race.id%>"><< Back to <%= Race.find_by_id(@race.id).name %></a>
 
-  <h1><%= @race.name %>: Edit Info</h1>
+  <h1><%= Race.find_by_id(@race.id).name %>: Edit Info</h1>
 
   <% if @race.errors.any? %>
     <p><% @race.errors.full_messages.each do |m| %>

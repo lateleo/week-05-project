@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 19) do
+ActiveRecord::Schema.define(version: 20) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "abilities", force: :cascade do |t|
     t.string "name"
-    t.text   "description"
+    t.text   "in_game_effect"
+    t.text   "flavor_text"
+    t.string "cooldown"
   end
 
   create_table "abilities_base_classes", id: false, force: :cascade do |t|

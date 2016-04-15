@@ -1,0 +1,31 @@
+<div class="container">
+
+  <a href="/abilities"><< Back to Abilities Index</a>
+  <h1><%= @ability.name %></h1>
+
+  <p><b>Cooldown:</b> <%= @ability.cooldown %></p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        <b>In-Game Effect:</b></br>
+        <%= @ability.in_game_effect %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        <b>Flavor Text:</b></br>
+        <em><%= @ability.flavor_text %></em>
+      </p>
+    </div>
+  </div>
+
+  <p>
+    ( <a href="/abilities/<%= @ability.id %>/edit">
+    Edit Info</a> )
+  </p>
+
+</div>
