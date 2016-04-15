@@ -1,0 +1,121 @@
+<div class="container">
+  <a href="/prestige_classes"><< Back to Prestige Classes Index</a>
+
+  <h1>New Prestige Class</h1>
+
+  <% if @prestige_class.errors.any? %>
+    <p><% @prestige_class.errors.full_messages.each do |m| %>
+      Error: <%= m %></br>
+      <% end %></p>
+  <% end %>
+
+  <form class="form-horizontal" action="/prestige_classes/new" method="post">
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <%#= Name %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="name" class="col-md-4 control-label">Name:</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="name"
+                    id="name" value="<%= @prestige_class.name %>">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <%#= Role %>
+          <div class="col-md-2">
+            <b>Role:</b>
+          </div>
+
+          <div class="col-md-3">
+            <select class="form-group" name="role">
+              <option disabled selected></option>
+              <% ["Attacker", "Defender", "Support", "Healer"].each do |role| %>
+                <% @prestige_class.role == role ? selected = "selected" : selected = "" %>
+                <option value="<%= role %>" <%selected%>><%= role %></option>
+              <% end %>
+            </select>
+          </div>
+
+          <%#= Armor Type %>
+          <div class="col-md-3">
+            <b>Armor Type:</b>
+          </div>
+
+          <div class="col-md-3">
+            <select class="form-group" name="armor_type">
+              <option disabled selected></option>
+              <% ["Light", "Medium", "Heavy"].each do |armor_type| %>
+                <% @prestige_class.armor_type == armor_type ? selected = "selected" : selected = "" %>
+                <option value="<%= armor_type %>" <%selected%>><%= armor_type %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
+        <%#= Entry Requirements %>
+        <div class="row">
+          <div class="col-md-6">
+            <p>
+              <b>Entry Requirements:</b>
+              <textarea name="entry_requirements" class="form-control"
+                rows="4"><%= @prestige_class.entry_requirements %></textarea>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <%#= Stat indices %>
+    <div class="row">
+      <div class="col-md-4">
+        <p><b>Stat Indices:</b></p>
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @prestige_class.indices.each do |stat, index| %>
+              <tr>
+                <td><b><%= stat %>:</b></td>
+                <% 0.step(to: 3) do |i| %>
+                  <td>
+                    <% i == @prestige_class.send(index).to_i ?
+                      checked = "checked" : checked = "" %>
+                      <input type="radio" name="<%= index %>"
+                        value="<%= i %>" <%= checked %>> <%= i %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%#= Flavor Text %>
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <b>Flavor Text:</b>
+          <textarea name="flavor_text" rows="8"
+            class="form-control"><%= @prestige_class.flavor_text %></textarea>
+        </p>
+      </div>
+    </div>
+
+    <%#= Submit Button %>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="submit" class="btn btn-default"
+          value="Create New Prestige Class">
+      </div>
+    </div>
+
+  </form>
+</div>

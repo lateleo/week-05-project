@@ -11,10 +11,10 @@
 
   <form class="form-horizontal" action="/base_classes/<%= @base_class.id %>/edit" method="post">
 
-    <%#= Name, Role and Armor Type %>
     <div class="row">
       <div class="col-md-6">
 
+        <%#= Name %>
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
@@ -26,12 +26,12 @@
             </div>
           </div>
         </div>
-
         <div class="row">
+
+          <%#= Role %>
           <div class="col-md-2">
             <b>Role:</b>
           </div>
-
           <div class="col-md-3">
             <select class="form-group" name="role">
               <option disabled selected></option>
@@ -42,10 +42,10 @@
             </select>
           </div>
 
+          <%#= Armor Type %>
           <div class="col-md-3">
             <b>Armor Type:</b>
           </div>
-
           <div class="col-md-3">
             <select class="form-group" name="armor_type">
               <option disabled selected></option>
