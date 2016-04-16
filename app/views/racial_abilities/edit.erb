@@ -1,7 +1,10 @@
 <div class="container">
-
-  <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>">
-    << Back to <%= RacialAbility.find_by_id(@racial_ability.id).name %></a>
+  <a href="/">DnPnZ Home</a> >
+    <a href="/races">Races</a> >
+      <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
+        <a href="/races/<%=@race.id %>/abilities/<%= @racial_ability.url_name%>">
+        <%= RacialAbility.find_by_id(@racial_ability.id).name %></a> >
+          <b>Edit</b>
 
   <h1><%= RacialAbility.find_by_id(@racial_ability.id).name %> - Edit Info</h1>
 

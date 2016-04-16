@@ -1,6 +1,9 @@
 <div class="container">
+  <a href="/">DnPnZ Home</a> >
+    <a href="/races">Races</a> >
+      <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
+        <b><%= @racial_ability.name %></b>
 
-  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
   <h1><%= @racial_ability.name %></h1>
 
   <p><b>Cooldown:</b> <%= @racial_ability.cooldown %></p>

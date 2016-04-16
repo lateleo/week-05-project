@@ -1,7 +1,9 @@
 <div class="container">
-  <a href="/races/<%= @race.id%>"><< Back to
-    <%= Race.find_by_id(@race.id).name %>
-  </a>
+  <a href="/">DnPnZ Home</a> >
+    <a href="/races">Races</a> >
+      <a href="/races/<%= @race.id%>">
+      <%= Race.find_by_id(@race.id).name %></a> >
+        <b>Edit</b>
 
   <h1><%= Race.find_by_id(@race.id).name %>: Edit Info</h1>
 

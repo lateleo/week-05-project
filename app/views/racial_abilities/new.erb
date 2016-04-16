@@ -1,6 +1,10 @@
 <div class="container">
-  <a href="/races/<%= @race.id %>"><< Back to <%= @race.name %></a>
-  <h1><%= @race.name %>: New Racial Ability</h1>
+  <a href="/">DnPnZ Home</a> >
+    <a href="/races">Races</a> >
+      <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
+        <b>New Racial Ability</b>
+
+  <h1>New Racial Ability</h1>
 
   <% if @racial_ability.errors.any? %>
     <p><% @racial_ability.errors.full_messages.each do |m| %>
