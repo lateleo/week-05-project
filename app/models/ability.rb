@@ -11,4 +11,11 @@ class Ability < ActiveRecord::Base
   has_and_belongs_to_many :base_classes
   has_and_belongs_to_many :prestige_classes
 
+  def update_with(params)
+    self.update_attributes(name: params['name'],
+                          cooldown: params['cooldown'],
+                          in_game_effect: params['in_game_effect'],
+                          flavor_text: params['flavor_text'])
+  end
+
 end

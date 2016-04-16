@@ -26,5 +26,31 @@ class PrestigeClass < ActiveRecord::Base
     validates :entry_requirements, presence: {message: "cannot be blank."}
 
   has_many :prestige_levels
+  has_and_belongs_to_many :abilities
+
+  def indices
+    indices = {"Stamina" => "stamina_index",
+              "Strength" => "strength_index",
+              "Agility" => "agility_index",
+              "Spell Power" => "spell_power_index",
+              "Wit" => "wit_index"}
+  end
+
+  def separate_reqs
+    self.entry_requirements.split("\r\n").map{|req| req.split(":")}
+  end
+
+  def update_with(params)
+    self.update_attributes(name: params['name'],
+                          role: params['role'],
+                          armor_type: params['armor_type'],
+                          entry_requirements: params['entry_requirements'],
+                          stamina_index: params['stamina_index'],
+                          strength_index: params['strength_index'],
+                          agility_index: params['agility_index'],
+                          spell_power_index: params['spell_power_index'],
+                          wit_index: params['wit_index'],
+                          flavor_text: params['flavor_text'])
+  end
 
 end

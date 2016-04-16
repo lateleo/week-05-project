@@ -1,0 +1,89 @@
+<div class="container">
+  <a href="/prestige_classes"><< Back to Prestige Classes Index</a>
+
+  <h1>Prestige Classes: <%= @prestige_class.name %></h1>
+
+
+
+  <%#= Flavor Text %>
+  <div class="row">
+    <div class="col-md-6">
+      <p><em><%= @prestige_class.flavor_text %></em></p>
+    </div>
+  </div>
+
+  <%#= Role and Stat Indices %>
+  <div class="row">
+    <div class="col-md-2">
+      <p><b>Role:</b> <%= @prestige_class.role %></p>
+      <p><b>Stat Indices:</b></p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <% @prestige_class.indices.each do |stat, index| %>
+            <tr>
+              <td><%= stat %>:</td>
+              <td class="text-right"><%= @prestige_class.send(index) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <p>(
+        <a href="/prestige_classes/<%= @prestige_class.id %>/edit">Edit Info</a>
+      )</p>
+    </div>
+
+    <%#= Armor Type and Entry Requirements %>
+    <div class="col-md-4">
+      <p><b>Armor Type:</b> <%= @prestige_class.armor_type %></p>
+      <p><b>Entry Requirements:</b></p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <% @prestige_class.separate_reqs.each do |req| %>
+            <tr>
+              <td class="col-md-4 text-right"><%= req[0] %>:</td>
+              <td><%= req[1] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <%#= Abilities %>
+  <div class="row">
+    <div class="col-md-10">
+      <p>
+        <b>Abilities (</b>
+        <a href="/prestige_classes/<%= @prestige_class.id %>/add_abilities">
+          Add</a> /
+        <a href="/prestige_classes/<%= @prestige_class.id %>/remove_abilities">
+          Remove</a>
+        <b>):</b>
+      </p>
+      <% if @abilities.any? %>
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @abilities.each do |ability| %>
+              <tr>
+                <td>
+                  <a href="/abilities/<%= ability.id %>">
+                    <%= ability.name %>
+                  </a>
+                </td>
+                <td><%= ability.in_game_effect %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>
+          <em>
+            There are no abilites available for <%= @prestige_class.name %>.
+          </em>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+</div>

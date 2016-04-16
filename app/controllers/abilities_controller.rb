@@ -18,32 +18,24 @@ post "/abilities/new" do
 end
 
 get "/abilities/error" do
-  binding.pry
   @page_name = "Error: Ability Not Found"
   erb :"abilities/error"
 end
 
 get "/abilities/:id" do
   @ability = Ability.find_by_id(params['id'])
-  redirect("/abilities/error") if !@ability
-  @page_name = "Abilities: #{@ability.name}"
+  @ability ? @page_name = "Abilities: #{@ability.name}" : redirect("/abilities/error")
   erb :"abilities/show"
 end
 
 get "/abilities/:id/edit" do
   @ability = Ability.find_by_id(params['id'])
-  redirect("/abilities/error") if !@ability
-  @page_name = "#{@ability.name}: Edit Info"
+  @ability ? @page_name = "#{@ability.name}: Edit Info" : redirect("/abilities/error")
   erb :"abilities/edit"
 end
 
 post "/abilities/:id/edit" do
   @ability = Ability.find_by_id(params['id'])
-  redirect("/abilities/error") if !@ability
-  @page_name = "#{@ability.name}: Edit Info"
-  @ability.update_attributes(
-                                    name: params['name'],
-                                    cooldown: params['cooldown'],
-                                    in_game_effect: params['in_game_effect'],
-                                    flavor_text: params['flavor_text']) ? redirect("/abilities/#{@ability.id}") : (erb :"abilities/edit")
+  @ability ? @page_name = "#{@ability.name}: Edit Info" : redirect("/abilities/error")
+  @ability.update_with(params) ? redirect("/abilities/#{@ability.id}") : (erb :"abilities/edit")
 end

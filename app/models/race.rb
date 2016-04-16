@@ -39,4 +39,15 @@ class Race < ActiveRecord::Base
               "Spell Power" => "spell_power_index",
               "Wit" => "wit_index"}
   end
+
+  def update_with(params)
+    self.update_attributes(name: params['name'],
+                          age_of_adulthood: params['age_of_adulthood'],
+                          stamina_index: params['stamina_index'],
+                          strength_index: params['strength_index'],
+                          agility_index: params['agility_index'],
+                          spell_power_index: params['spell_power_index'],
+                          wit_index: params['wit_index'],
+                          flavor_text: params['flavor_text'])
+  end
 end

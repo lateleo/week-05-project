@@ -25,52 +25,49 @@ end
 
 get "/base_classes/:id" do
   @base_class = BaseClass.find_by_id(params['id'])
-  redirect("/base_classes/error") if !@base_class
-  @page_name = "Base Classes: #{@base_class.name}"
+  @base_class ? @page_name = "Base Classes: #{@base_class.name}" : redirect("/base_classes/error")
   @abilities = @base_class.abilities.order(:name)
   erb :"base_classes/show"
 end
 
 get "/base_classes/:id/edit" do
   @base_class = BaseClass.find_by_id(params['id'])
-  redirect("/base_classes/error") if !@base_class
-  @page_name = "#{@base_class}: Edit Info"
+  @base_class ? @page_name = "#{@base_class.name}: Edit Info" : redirect("/base_classes/error")
   erb :"base_classes/edit"
 end
 
 post "/base_classes/:id/edit" do
   @base_class = BaseClass.find_by_id(params['id'])
-  redirect("/base_classes/error") if !@base_class
-  @page_name = "#{@base_class}: Edit Info"
-  @base_class.update_attributes(
-                                name: params['name'],
-                                role: params['role'],
-                                armor_type: params['armor_type'],
-                                stamina_index: params['stamina_index'],
-                                strength_index: params['strength_index'],
-                                agility_index: params['agility_index'],
-                                spell_power_index: params['spell_power_index'],
-                                wit_index: params['wit_index'],
-                                flavor_text: params['flavor_text']
-    ) ? redirect("/base_classes/#{@base_class.id}") : (erb :"base_classes/edit")
+  @base_class ? @page_name = "#{@base_class.name}: Edit Info" : redirect("/base_classes/error")
+  @base_class.update_with(params) ? redirect("/base_classes/#{@base_class.id}") : (erb :"base_classes/edit")
 end
 
-get "/base_classes/:id/edit_abilities" do
+get "/base_classes/:id/add_abilities" do
   @base_class = BaseClass.find_by_id(params['id'])
-  redirect("/base_classes/error") if !@base_class
-  @page_name = "#{@base_class}: Edit Abilities"
-  @abilities = Ability.all.order(:name)
-  erb :"base_classes/edit_abilities"
+  @base_class ? @page_name = "#{@base_class.name}: Edit Abilities" : redirect("/base_classes/error")
+  @abilities = Ability.all.order(:name) - @base_class.abilities
+  erb :"base_classes/add_abilities"
 end
 
-post "/base_classes/:id/edit_abilities" do
+post "/base_classes/:id/add_abilities" do
   @base_class = BaseClass.find_by_id(params['id'])
-  redirect("/base_classes/error") if !@base_class
-  @page_name = "#{@base_class}: Edit Abilities"
-  @abilities = Ability.all.order(:name)
-  @base_class.abilities.clear
-  @abilities.all? {|ability| @base_class.abilities << ability if ability.name == params[ability.name]} ?
-    redirect("/base_classes/#{@base_class.id}") : (erb :"base_classes/edit_abilities")
+  @base_class ? @page_name = "#{@base_class.name}: Edit Abilities" : redirect("/base_classes/error")
+  @base_class.abilities += Ability.all.select{|a| params.include?(a.name)}
+  redirect("/base_classes/#{@base_class.id}")
+end
+
+get "/base_classes/:id/remove_abilities" do
+  @base_class = BaseClass.find_by_id(params['id'])
+  @base_class ? @page_name = "#{@base_class.name}: Remove Abilities" : redirect("/base_classes/error")
+  @abilities = @base_class.abilities.order(:name)
+  erb :"base_classes/remove_abilities"
+end
+
+post "/base_classes/:id/remove_abilities" do
+  @base_class = BaseClass.find_by_id(params['id'])
+  @base_class ? @page_name = "#{@base_class.name}: Remove Abilities" : redirect("/base_classes/error")
+  @base_class.abilities -= Ability.all.select{|a| params.include?(a.name)}
+  redirect("/base_classes/#{@base_class.id}")
 end
 
 #binding.pry

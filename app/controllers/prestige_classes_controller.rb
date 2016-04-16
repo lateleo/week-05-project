@@ -25,51 +25,52 @@ end
 
 get "/prestige_classes/:id" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
-  redirect("/prestige_classes/error") if !@prestige_class
-  @page_name = "Prestige Classes: #{@prestige_class.name}"
+  @prestige_class ? @page_name = "Prestige Classes: #{@prestige_class.name}" : redirect("/prestige_classes/error")
   @abilities = @prestige_class.abilities.order(:name)
   erb :"prestige_classes/show"
 end
 
 get "/prestige_classes/:id/edit" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
-  redirect("/prestige_classes/error") if !@prestige_class
-  @page_name = "#{@prestige_class}: Edit Info"
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Edit Abilities" : redirect("/prestige_classes/error")
   erb :"prestige_classes/edit"
 end
 
 post "/prestige_classes/:id/edit" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
-  redirect("/prestige_classes/error") if !@prestige_class
-  @page_name = "#{@prestige_class}: Edit Info"
-  @prestige_class.update_attributes(
-                                name: params['name'],
-                                role: params['role'],
-                                armor_type: params['armor_type'],
-                                entry_requirements: params['entry_requirements'],
-                                stamina_index: params['stamina_index'],
-                                strength_index: params['strength_index'],
-                                agility_index: params['agility_index'],
-                                spell_power_index: params['spell_power_index'],
-                                wit_index: params['wit_index'],
-                                flavor_text: params['flavor_text']
-    ) ? redirect("/prestige_classes/#{@prestige_class.id}") : (erb :"prestige_classes/edit")
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Edit Abilities" : redirect("/prestige_classes/error")
+  @prestige_class.update_with(params) ? redirect("/prestige_classes/#{@prestige_class.id}") : (erb :"prestige_classes/edit")
 end
 
-get "/prestige_classes/:id/edit_abilities" do
+get "/prestige_classes/:id/add_abilities" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
-  redirect("/prestige_classes/error") if !@prestige_class
-  @page_name = "#{@prestige_class}: Edit Abilities"
-  @abilities = Ability.all.order(:name)
-  erb :"prestige_classes/edit_abilities"
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Add Abilities" : redirect("/prestige_classes/error")
+  @abilities = Ability.all.order(:name) - @prestige_class.abilities
+  erb :"prestige_classes/add_abilities"
 end
 
-post "/prestige_classes/:id/edit_abilities" do
+post "/prestige_classes/:id/add_abilities" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
-  redirect("/prestige_classes/error") if !@prestige_class
-  @page_name = "#{@prestige_class}: Edit Abilities"
-  @abilities = Ability.all.order(:name)
-  @prestige_class.abilities.clear
-  @abilities.all? {|ability| @prestige_class.abilities << ability if ability.name == params[ability.name]} ?
-    redirect("/prestige_classes/#{@prestige_class.id}") : (erb :"prestige_classes/edit_abilities")
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Add Abilities" : redirect("/prestige_classes/error")
+  @prestige_class.abilities += Ability.all.select{|a| params.include?(a.name)}
+  redirect("/prestige_classes/#{@prestige_class.id}")
 end
+
+get "/prestige_classes/:id/remove_abilities" do
+  @prestige_class = PrestigeClass.find_by_id(params['id'])
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Remove Abilities" : redirect("/prestige_classes/error")
+  @abilities = @prestige_class.abilities.order(:name)
+  erb :"prestige_classes/remove_abilities"
+end
+
+post "/prestige_classes/:id/remove_abilities" do
+  @prestige_class = PrestigeClass.find_by_id(params['id'])
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Remove Abilities" : redirect("/prestige_classes/error")
+  @prestige_class.abilities -= Ability.all.select{|a| params.include?(a.name)}
+  redirect("/prestige_classes/#{@prestige_class.id}")
+end
+
+
+
+
+#

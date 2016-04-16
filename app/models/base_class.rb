@@ -34,4 +34,15 @@ class BaseClass < ActiveRecord::Base
               "Wit" => "wit_index"}
   end
 
+  def update_with(params)
+    self.update_attributes(name: params['name'],
+                          role: params['role'],
+                          armor_type: params['armor_type'],
+                          stamina_index: params['stamina_index'],
+                          strength_index: params['strength_index'],
+                          agility_index: params['agility_index'],
+                          spell_power_index: params['spell_power_index'],
+                          wit_index: params['wit_index'],
+                          flavor_text: params['flavor_text'])
+  end
 end

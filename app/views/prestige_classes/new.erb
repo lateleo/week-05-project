@@ -38,8 +38,8 @@
             <select class="form-group" name="role">
               <option disabled selected></option>
               <% ["Attacker", "Defender", "Support", "Healer"].each do |role| %>
-                <% @prestige_class.role == role ? selected = "selected" : selected = "" %>
-                <option value="<%= role %>" <%selected%>><%= role %></option>
+                <% role == @prestige_class.role ? selected = "selected" : selected = "" %>
+                <option value="<%= role %>" <%=selected%>><%= role %></option>
               <% end %>
             </select>
           </div>
@@ -53,23 +53,14 @@
             <select class="form-group" name="armor_type">
               <option disabled selected></option>
               <% ["Light", "Medium", "Heavy"].each do |armor_type| %>
-                <% @prestige_class.armor_type == armor_type ? selected = "selected" : selected = "" %>
-                <option value="<%= armor_type %>" <%selected%>><%= armor_type %></option>
+                <% armor_type == @prestige_class.armor_type ? selected = "selected" : selected = "" %>
+                <option value="<%= armor_type %>" <%=selected%>><%= armor_type %></option>
               <% end %>
             </select>
           </div>
         </div>
 
-        <%#= Entry Requirements %>
-        <div class="row">
-          <div class="col-md-6">
-            <p>
-              <b>Entry Requirements:</b>
-              <textarea name="entry_requirements" class="form-control"
-                rows="4"><%= @prestige_class.entry_requirements %></textarea>
-            </p>
-          </div>
-        </div>
+
 
       </div>
     </div>
@@ -98,12 +89,23 @@
       </div>
     </div>
 
+    <%#= Entry Requirements %>
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <b>Entry Requirements:</b>
+          <textarea name="entry_requirements" class="form-control"
+            rows="4"><%= @prestige_class.entry_requirements %></textarea>
+        </p>
+      </div>
+    </div>
+
     <%#= Flavor Text %>
     <div class="row">
       <div class="col-md-6">
         <p>
           <b>Flavor Text:</b>
-          <textarea name="flavor_text" rows="8"
+          <textarea name="flavor_text" rows="6"
             class="form-control"><%= @prestige_class.flavor_text %></textarea>
         </p>
       </div>

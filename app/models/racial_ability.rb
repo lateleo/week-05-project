@@ -18,4 +18,11 @@ class RacialAbility < ActiveRecord::Base
     self.url_name = name.downcase.gsub(" ","_")
   end
 
+  def update_with(params)
+    self.update_attributes(name: params['name'],
+                          cooldown: params['cooldown'],
+                          in_game_effect: params['in_game_effect'],
+                          flavor_text: params['flavor_text'])
+  end
+
 end
