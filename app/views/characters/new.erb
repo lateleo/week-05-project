@@ -17,38 +17,64 @@
         <div class="form-group">
           <label for="name" class="col-md-4 control-label">Name:</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" name="name"
+            <input type="text" class="form-control" name="name",
                 id="name" value="<%= @character.name %>">
           </div>
         </div>
         <div class="form-group">
           <label for="age" class="col-md-4 control-label">Age:</label>
           <div class="col-md-2">
-            <input type="text" class="form-control" name="age"
+            <input type="text" class="form-control" name="age",
               id="age" value="<%= @character.age %>">
           </div>
         </div>
       </div>
     </div>
 
-    <%#= Stats %>
     <div class="row">
-      <div class="col-md-4">
+
+      <%#= Stats %>
+      <div class="col-md-2">
         <p><b>Stats:</b></p>
         <table class="table table-striped table-condensed">
           <tbody>
             <% @character.stats.each do |key, stat| %>
               <tr>
                 <td><b><%= key %>:</b></td>
-                  <td>
-                      <input type="text" name="<%= stat %>" size="4"
-                        value="<%= @character.send(stat) %>">
-                  </td>
-                <% end %>
+                <td>
+                    <input type="text" name="<%= stat %>" size="4",
+                      value="<%= @character.send(stat)%>">
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
+      </div>
+
+      <%#= Class and Race %>
+      <div class="col-md-2 col-md-offset-1">
+
+        <p><b>Race:</b>
+          <select name="race_id" class="form-control">
+            <option selected disabled>Choose One:</option>
+            <% @races.each do |race| %>
+              <% race.id == @character.race_id ?
+                selected = "selected" : selected = "" %>
+              <option value="race.id" <%=selected%>><%= race.name %></option>
+            <% end %>
+          </select>
+        </p>
+        <p><b>Class:</b>
+          <select name="base_class_id" class="form-control">
+            <option selected disabled>Choose One:</option>
+            <% @base_classes.each do |base_class| %>
+              <% base_class.id == @character.class_id ?
+                selected = "selected" : selected = "" %>
+              <option value="base_class.id",
+                <%=selected%>><%= base_class.name %></option>
+            <% end %>
+          </select>
+        </p>
       </div>
     </div>
 
@@ -57,7 +83,8 @@
       <div class="col-md-6">
         <p>
           <b>Backstory:</b>
-          <textarea name="Backstory" rows="6" class="form-control"><%= @character.backstory %></textarea>
+          <textarea name="Backstory" class="form-control",
+            rows="6"><%= @character.backstory %></textarea>
         </p>
       </div>
     </div>
@@ -66,7 +93,8 @@
     <div class="row">
       <div class="col-md-6">
         <input type="hidden" name="base_level" value="1">
-        <input type="submit" value="Create New Character" class="btn btn-default">
+        <input type="submit" class="btn btn-default",
+          value="Create New Character">
       </div>
     </div>
 

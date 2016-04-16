@@ -43,7 +43,7 @@
                 <td><b><%= stat %>:</b></td>
                 <% -3.step(to: 3) do |i| %>
                   <td>
-                    <% i == @race.send(index).to_i ?,
+                    <% i == @race.send(index).to_i ?
                       checked = "checked" : checked = "" %>
                       <input type="radio" name="<%= index %>",
                         value="<%= i %>" <%= checked %>> <%= i %>

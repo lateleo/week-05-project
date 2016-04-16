@@ -10,12 +10,16 @@ end
 get "/characters/new" do
   @page_name = "New Character"
   @character = Character.new
+  @base_classes = BaseClass.all.order(:name)
+  @races = Race.all.order(:name)
   erb :"characters/new"
 end
 
 post "/characters/new" do
   @page_name = "New Character"
   @character = Character.new(params)
+  @base_classes = BaseClass.all.order(:name)
+  @races = Race.all.order(:name)
   @character.save ? redirect("/characters") : (erb :"characters/new")
 end
 
@@ -32,6 +36,8 @@ end
 
 get "/characters/:id/edit" do
   @character = Character.find_by_id(params['id'])
+  @base_classes = BaseClass.all.order(:name)
+  @races = Race.all.order(:name)
   @character ? @page_name = "#{@character.name}: Edit Info" : redirect("/characters/error")
   erb :"characters/edit"
 end
@@ -39,5 +45,7 @@ end
 post "/characters/:id/edit" do
   @character = Character.find_by_id(params['id'])
   @character ? @page_name = "#{@character.name}: Edit Info" : redirect("/characters/error")
+  @base_classes = BaseClass.all.order(:name)
+  @races = Race.all.order(:name)
   @character.update_with(params) ? redirect("/characters/#{@character.id}") : (erb :"characters/edit")
 end

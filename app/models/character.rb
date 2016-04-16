@@ -29,6 +29,8 @@ class Character < ActiveRecord::Base
   validates :class_id, presence: {message: "cannot be blank."}
   validates :race_id, presence: {message: "cannot be blank."}
   validates :racial_ability_id, presence: {message: "cannot be blank."}
+  validate :validate_age
+
   before_validation :set_character_level
 
   belongs_to :base_class
