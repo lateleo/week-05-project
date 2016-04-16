@@ -1,11 +1,14 @@
 <div class="container">
-  <a href="/base_classes/<%= @base_class.id %>"><< Back to <%= @base_class.name %></a>
+  <a href="/base_classes/<%= @base_class.id %>"><< Back to
+    <%= @base_class.name %>
+  </a>
 
   <h1><%= @base_class.name %>: Add Abilities</h1>
 
   <div class="row">
     <div class="col-md-10">
-      <form class="form-horizontal" action="/base_classes/<%= @base_class.id %>/add_abilities" method="post">
+      <form class="form-horizontal" method="post",
+        action="/base_classes/<%= @base_class.id %>/add_abilities">
 
         <div class="row">
           <div class="col-md-12">
@@ -15,7 +18,8 @@
                 <% @abilities.each do |ability| %>
                   <tr>
                     <td>
-                      <input type="checkbox" name="<%= ability.name %>" value="<%= ability.name %>">
+                      <input type="checkbox" name="<%=ability.name%>",
+                        value="<%=ability.name%>">
                     </td>
                     <td>
                       <a href="/abilities/<%= ability.id %>">
@@ -31,7 +35,9 @@
 
         <div class="row">
           <div class="col-md-5">
-            <input type="submit" value="Add Selected Abilities" class="btn btn-default">
+            <input type="hidden" name="_method" value="link">
+            <input type="submit" class="btn btn-default",
+              value="Add Selected Abilities">
           </div>
         </div>
       </form>

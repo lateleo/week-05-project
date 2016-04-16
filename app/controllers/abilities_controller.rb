@@ -34,7 +34,7 @@ get "/abilities/:id/edit" do
   erb :"abilities/edit"
 end
 
-post "/abilities/:id/edit" do
+patch "/abilities/:id/edit" do
   @ability = Ability.find_by_id(params['id'])
   @ability ? @page_name = "#{@ability.name}: Edit Info" : redirect("/abilities/error")
   @ability.update_with(params) ? redirect("/abilities/#{@ability.id}") : (erb :"abilities/edit")

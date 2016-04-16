@@ -37,8 +37,9 @@
           <div class="col-md-3">
             <select class="form-group" name="role">
               <option disabled selected></option>
-              <% ["Attacker", "Defender", "Support", "Healer"].each do |role| %>
-                <% role == @prestige_class.role ? selected = "selected" : selected = "" %>
+              <% ["Attacker","Defender","Support","Healer"].each do |role| %>
+                <% role == @prestige_class.role ?
+                  selected = "selected" : selected = "" %>
                 <option value="<%= role %>" <%=selected%>><%= role %></option>
               <% end %>
             </select>
@@ -53,8 +54,10 @@
             <select class="form-group" name="armor_type">
               <option disabled selected></option>
               <% ["Light", "Medium", "Heavy"].each do |armor_type| %>
-                <% armor_type == @prestige_class.armor_type ? selected = "selected" : selected = "" %>
-                <option value="<%= armor_type %>" <%=selected%>><%= armor_type %></option>
+                <% armor_type == @prestige_class.armor_type ?
+                  selected = "selected" : selected = "" %>
+                <option value="<%= armor_type %>",
+                  <%=selected%>><%= armor_type %></option>
               <% end %>
             </select>
           </div>

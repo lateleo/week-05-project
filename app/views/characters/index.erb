@@ -1,0 +1,31 @@
+<div class="container">
+  <a href="/"><< Back to Main Index</a>
+  <h1>Characters Index</h1>
+
+  <p>
+    <% if @characters.any? %>
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-striped table-condensed">
+            <tbody>
+              <% @characters.each do |character| %>
+                <tr>
+                  <td>
+                    <a href="/characters/<%= character.id %>">
+                      <%= character.name %>
+                    </a>
+                  </td>
+                  <td><%= character.backstory %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% else %>
+      <em>(No characters have been created.)</em>
+    <% end %>
+  </p>
+
+  <a href="/characters/new">New Character</a>
+</div>

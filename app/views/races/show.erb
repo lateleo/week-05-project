@@ -44,7 +44,7 @@
             <% @racial_abilities.each do |ability| %>
               <tr>
                 <td>
-                  <a href="/races/<%= @race.id %>/abilities/<%= ability.url_name %>">
+                  <a href="/races/<%=@race.id%>/abilities/<%=ability.url_name%>">
                     <%= ability.name %>
                   </a>
                 </td>

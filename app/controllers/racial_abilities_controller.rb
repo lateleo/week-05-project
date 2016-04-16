@@ -38,7 +38,7 @@ get "/races/:id/abilities/:url_name/edit" do
   erb :"racial_abilities/edit"
 end
 
-post "/races/:id/abilities/:url_name/edit" do
+patch "/races/:id/abilities/:url_name/edit" do
   @race = Race.find_by_id(params['id'])
   @racial_ability = RacialAbility.find_by(race_id: params['id'], url_name: params['url_name'])
   @race && @racial_ability ? @page_name = "#{@racial_ability.name} - Edit Info" : redirect("/races/#{params['id']}/abilities/error")

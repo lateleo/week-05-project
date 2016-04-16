@@ -13,8 +13,7 @@ class Character < ActiveRecord::Base
 
   # Age threshold set at 18 for now, will later redefine to age of adulthood for the given race
   validates_with UniversalValidator
-  validates :age, presence: {message: "cannot be blank."},
-    numericality: {allow_nil: true, greater_than_or_equal_to: 18, message: "must be an adult."}
+  validates :age, presence: {message: "cannot be blank."}
   validates :base_level, presence: {message: "cannot be blank."},
     numericality: {greater_than: 0, message: "must be positive."}
   validates :stamina, presence: {message: "cannot be blank."},
@@ -43,4 +42,19 @@ class Character < ActiveRecord::Base
     self.character_level = base_level
     self.prestige_levels.each { |prestige_level| self.character_level += prestige_level.levels}
   end
+
+  def validate_age
+    if self.age < self.race.age_of_adulthood
+      errors.add(:age, "of #{self.race.name} must be greater than or equal to #{self.race.age_of_adulthood}.")
+    end
+  end
+
+  def stats
+    stats = {"Stamina" => "stamina",
+              "Strength" => "strength",
+              "Agility" => "agility",
+              "Spell Power" => "spell_power",
+              "Wit" => "wit"}
+  end
+
 end

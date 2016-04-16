@@ -35,7 +35,7 @@ get "/races/:id/edit" do
   erb :"races/edit"
 end
 
-post "/races/:id/edit" do
+patch "/races/:id/edit" do
   @race = Race.find_by_id(params['id'])
   @race ? @page_name = "#{@race.name}: Edit Info" : redirect("/races/error")
   @race.update_with(params) ? redirect("/races/#{@race.id}") : (erb :"races/edit")

@@ -1,0 +1,74 @@
+<div class="container">
+  <a href="/characters"><< Back to Characters Index</a>
+
+  <h1>New Character</h1>
+
+  <% if @character.errors.any? %>
+    <p><% @character.errors.full_messages.each do |m| %>
+      Error: <%= m %></br>
+      <% end %></p>
+  <% end %>
+
+  <form class="form-horizontal" action="/characters/new" method="post">
+
+    <%#= Name and Age%>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name" class="col-md-4 control-label">Name:</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="name"
+                id="name" value="<%= @character.name %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="age" class="col-md-4 control-label">Age:</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" name="age"
+              id="age" value="<%= @character.age %>">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%#= Stats %>
+    <div class="row">
+      <div class="col-md-4">
+        <p><b>Stats:</b></p>
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @character.stats.each do |key, stat| %>
+              <tr>
+                <td><b><%= key %>:</b></td>
+                  <td>
+                      <input type="text" name="<%= stat %>" size="4"
+                        value="<%= @character.send(stat) %>">
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%#= Backstory %>
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <b>Backstory:</b>
+          <textarea name="Backstory" rows="6" class="form-control"><%= @character.backstory %></textarea>
+        </p>
+      </div>
+    </div>
+
+    <%#= Submit Button %>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="hidden" name="base_level" value="1">
+        <input type="submit" value="Create New Character" class="btn btn-default">
+      </div>
+    </div>
+
+  </form>
+</div>

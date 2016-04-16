@@ -12,7 +12,7 @@
   <% end %>
 
   <form class="form-horizontal", method="post",
-    action="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit">
+    action="/races/<%=@race.id%>/abilities/<%=@racial_ability.url_name%>/edit">
 
     <%#= Name and Cooldown %>
     <div class="row">
@@ -25,7 +25,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="cooldown" class="col-md-4 control-label">Cooldown:</label>
+          <label for="cooldown" class="col-md-4 control-label">Cooldown:
+          </label>
           <div class="col-md-4">
             <input type="text" class="form-control" name="cooldown"
               id="cooldown" value="<%= @racial_ability.cooldown %>">
@@ -38,16 +39,20 @@
     <div class="row">
       <div class="col-md-6">
         <p><b>In-Game Effect:</b>
-        <textarea name="in_game_effect" rows="8" class="form-control"><%= @racial_ability.in_game_effect %></textarea></p>
+        <textarea name="in_game_effect" class="form-control"
+          rows="8"><%= @racial_ability.in_game_effect %></textarea></p>
         <p><b>Flavor Text:</b>
-        <textarea name="flavor_text" rows="8" class="form-control"><%= @racial_ability.flavor_text %></textarea></p>
+        <textarea name="flavor_text" class="form-control"
+          rows="8"><%= @racial_ability.flavor_text %></textarea></p>
       </div>
     </div>
 
     <%#= Submit Button %>
     <div class="row">
       <div class="col-md-6">
-        <input type="submit" value="Update <%= RacialAbility.find_by_id(@racial_ability.id).name %>" class="btn btn-default">
+        <input type="hidden" name="_method" value="patch">
+        <input type="submit" class="btn btn-default"
+          value="Update <%=RacialAbility.find_by_id(@racial_ability.id).name%>">
       </div>
     </div>
 

@@ -36,7 +36,7 @@ get "/prestige_classes/:id/edit" do
   erb :"prestige_classes/edit"
 end
 
-post "/prestige_classes/:id/edit" do
+patch "/prestige_classes/:id/edit" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
   @prestige_class ? @page_name = "#{@prestige_class.name}: Edit Abilities" : redirect("/prestige_classes/error")
   @prestige_class.update_with(params) ? redirect("/prestige_classes/#{@prestige_class.id}") : (erb :"prestige_classes/edit")
@@ -49,7 +49,7 @@ get "/prestige_classes/:id/add_abilities" do
   erb :"prestige_classes/add_abilities"
 end
 
-post "/prestige_classes/:id/add_abilities" do
+link "/prestige_classes/:id/add_abilities" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
   @prestige_class ? @page_name = "#{@prestige_class.name}: Add Abilities" : redirect("/prestige_classes/error")
   @prestige_class.abilities += Ability.all.select{|a| params.include?(a.name)}
@@ -63,7 +63,7 @@ get "/prestige_classes/:id/remove_abilities" do
   erb :"prestige_classes/remove_abilities"
 end
 
-post "/prestige_classes/:id/remove_abilities" do
+unlink "/prestige_classes/:id/remove_abilities" do
   @prestige_class = PrestigeClass.find_by_id(params['id'])
   @prestige_class ? @page_name = "#{@prestige_class.name}: Remove Abilities" : redirect("/prestige_classes/error")
   @prestige_class.abilities -= Ability.all.select{|a| params.include?(a.name)}

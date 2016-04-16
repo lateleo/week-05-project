@@ -22,7 +22,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="age_of_adulthood" class="col-md-4 control-label">Age of Adulthood:</label>
+          <label for="age_of_adulthood",
+            class="col-md-4 control-label">Age of Adulthood:</label>
           <div class="col-md-2">
             <input type="text" class="form-control" name="age_of_adulthood"
               id="age_of_adulthood" value="<%= @race.age_of_adulthood %>">
@@ -42,8 +43,10 @@
                 <td><b><%= stat %>:</b></td>
                 <% -3.step(to: 3) do |i| %>
                   <td>
-                    <% i == @race.send(index).to_i ? checked = "checked" : checked = "" %>
-                      <input type="radio" name="<%= index %>" value="<%= i %>" <%= checked %>> <%= i %>
+                    <% i == @race.send(index).to_i ?,
+                      checked = "checked" : checked = "" %>
+                      <input type="radio" name="<%= index %>",
+                        value="<%= i %>" <%= checked %>> <%= i %>
                   </td>
                 <% end %>
               </tr>
@@ -58,7 +61,8 @@
       <div class="col-md-6">
         <p>
           <b>Flavor Text:</b>
-          <textarea name="flavor_text" rows="6" class="form-control"><%= @race.flavor_text %></textarea>
+          <textarea name="flavor_text" class="form-control",
+            rows="6"><%= @race.flavor_text %></textarea>
         </p>
       </div>
     </div>

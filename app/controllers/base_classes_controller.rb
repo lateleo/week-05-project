@@ -36,7 +36,7 @@ get "/base_classes/:id/edit" do
   erb :"base_classes/edit"
 end
 
-post "/base_classes/:id/edit" do
+patch "/base_classes/:id/edit" do
   @base_class = BaseClass.find_by_id(params['id'])
   @base_class ? @page_name = "#{@base_class.name}: Edit Info" : redirect("/base_classes/error")
   @base_class.update_with(params) ? redirect("/base_classes/#{@base_class.id}") : (erb :"base_classes/edit")
@@ -49,7 +49,7 @@ get "/base_classes/:id/add_abilities" do
   erb :"base_classes/add_abilities"
 end
 
-post "/base_classes/:id/add_abilities" do
+link "/base_classes/:id/add_abilities" do
   @base_class = BaseClass.find_by_id(params['id'])
   @base_class ? @page_name = "#{@base_class.name}: Edit Abilities" : redirect("/base_classes/error")
   @base_class.abilities += Ability.all.select{|a| params.include?(a.name)}
@@ -63,7 +63,7 @@ get "/base_classes/:id/remove_abilities" do
   erb :"base_classes/remove_abilities"
 end
 
-post "/base_classes/:id/remove_abilities" do
+unlink "/base_classes/:id/remove_abilities" do
   @base_class = BaseClass.find_by_id(params['id'])
   @base_class ? @page_name = "#{@base_class.name}: Remove Abilities" : redirect("/base_classes/error")
   @base_class.abilities -= Ability.all.select{|a| params.include?(a.name)}
