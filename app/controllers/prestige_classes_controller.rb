@@ -70,7 +70,12 @@ unlink "/prestige_classes/:id/remove_abilities" do
   redirect("/prestige_classes/#{@prestige_class.id}")
 end
 
-
+delete "/prestige_classes/:id/delete" do
+  @prestige_class = PrestigeClass.find_by_id(params['id'])
+  @prestige_class ? @page_name = "#{@prestige_class.name}: Remove Abilities" : redirect("/prestige_classes/error")
+  @prestige_class.destroy
+  redirect("/prestige_classes")
+end
 
 
 #

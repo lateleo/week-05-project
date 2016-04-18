@@ -45,5 +45,11 @@ patch "/races/:id/abilities/:url_name/edit" do
   @racial_ability.update_with(params) ? redirect("/races/#{@race.id}/abilities/#{@racial_ability.url_name}") : (erb :"racial_abilities/edit")
 end
 
-
+delete "/races/:id/abilities/:url_name/delete" do
+  @race = Race.find_by_id(params['id'])
+  @racial_ability = RacialAbility.find_by(race_id: params['id'], url_name: params['url_name'])
+  @race && @racial_ability ? @page_name = "#{@racial_ability.name} - Edit Info" : redirect("/races/#{params['id']}/abilities/error")
+  @racial_ability.destroy
+  redirect("/races/#{@race.id}")
+end
 #binding.pry

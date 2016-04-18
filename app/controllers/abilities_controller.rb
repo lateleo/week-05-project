@@ -39,3 +39,10 @@ patch "/abilities/:id/edit" do
   @ability ? @page_name = "#{@ability.name}: Edit Info" : redirect("/abilities/error")
   @ability.update_with(params) ? redirect("/abilities/#{@ability.id}") : (erb :"abilities/edit")
 end
+
+delete "/abilities/:id/delete" do
+  @ability = Ability.find_by_id(params['id'])
+  @ability ? @page_name = "#{@ability.name}: Edit Info" : redirect("/abilities/error")
+  @ability.destroy
+  redirect("/abilities")
+end

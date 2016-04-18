@@ -70,4 +70,11 @@ unlink "/base_classes/:id/remove_abilities" do
   redirect("/base_classes/#{@base_class.id}")
 end
 
+delete "/base_classes/:id/delete" do
+  @base_class = BaseClass.find_by_id(params['id'])
+  @base_class ? @page_name = "#{@base_class.name}: Remove Abilities" : redirect("/base_classes/error")
+  @base_class.destroy
+  redirect("/base_classes")
+end
+
 #binding.pry
