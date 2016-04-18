@@ -62,7 +62,8 @@
             <% @races.each do |race| %>
               <% race.id == @character.race_id ?
                 selected = "selected" : selected = "" %>
-              <option value="race.id" <%=selected%>><%= race.name %></option>
+              <option value="<%=race.id%>",
+                 <%=selected%>><%= race.name %></option>
             <% end %>
           </select>
         </p>
@@ -70,9 +71,9 @@
           <select name="base_class_id" class="form-control">
             <option selected disabled>Choose One:</option>
             <% @base_classes.each do |base_class| %>
-              <% base_class.id == @character.class_id ?
+              <% base_class.id == @character.base_class_id ?
                 selected = "selected" : selected = "" %>
-              <option value="base_class.id",
+              <option value="<%= base_class.id %>",
                 <%=selected%>><%= base_class.name %></option>
             <% end %>
           </select>
@@ -85,7 +86,7 @@
       <div class="col-md-6">
         <p>
           <b>Backstory:</b>
-          <textarea name="Backstory" class="form-control",
+          <textarea name="backstory" class="form-control",
             rows="6"><%= @character.backstory %></textarea>
         </p>
       </div>

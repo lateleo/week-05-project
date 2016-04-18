@@ -9,7 +9,7 @@ class Character < ActiveRecord::Base
                             # spell_power (integer),
                             # wit (integer),
                             # backstory (text, optional)
-  # Has exactly one class, race, and racial_ability
+  # Has exactly one base_class, race, and racial_ability
 
   # Age threshold set at 18 for now, will later redefine to age of adulthood for the given race
   validates_with UniversalValidator
@@ -26,9 +26,9 @@ class Character < ActiveRecord::Base
     numericality: {allow_nil: true, greater_than: 0, message: "must be positive."}
   validates :wit, presence: {message: "cannot be blank."},
     numericality: {allow_nil: true, greater_than: 0, message: "must be positive."}
-  validates :class_id, presence: {message: "cannot be blank."}
+  validates :base_class_id, presence: {message: "cannot be blank."}
   validates :race_id, presence: {message: "cannot be blank."}
-  validates :racial_ability_id, presence: {message: "cannot be blank."}
+#  validates :racial_ability_id, presence: {message: "cannot be blank."}
   validate :validate_age
 
   before_validation :set_character_level
@@ -46,8 +46,8 @@ class Character < ActiveRecord::Base
   end
 
   def validate_age
-    if self.age < self.race.age_of_adulthood
-      errors.add(:age, "of #{self.race.name} must be greater than or equal to #{self.race.age_of_adulthood}.")
+    if age < race.age_of_adulthood
+      errors.add(:age, "of #{race.name} must be greater than or equal to #{race.age_of_adulthood}.")
     end
   end
 

@@ -47,5 +47,6 @@ post "/characters/:id/edit" do
   @character ? @page_name = "#{@character.name}: Edit Info" : redirect("/characters/error")
   @base_classes = BaseClass.all.order(:name)
   @races = Race.all.order(:name)
+
   @character.update_with(params) ? redirect("/characters/#{@character.id}") : (erb :"characters/edit")
 end

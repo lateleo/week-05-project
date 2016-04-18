@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20) do
+ActiveRecord::Schema.define(version: 21) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20) do
     t.integer "base_level"
     t.integer "race_id"
     t.integer "racial_ability_id"
-    t.integer "class_id"
+    t.integer "base_class_id"
     t.integer "stamina"
     t.integer "strength"
     t.integer "agility"
