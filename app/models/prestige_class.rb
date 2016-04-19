@@ -40,6 +40,10 @@ class PrestigeClass < ActiveRecord::Base
     self.entry_requirements.split("\r\n").map{|req| req.split(":")}
   end
 
+  def retrieve_req(criterion)
+    entry_requirements.slice(/(?<=[\n\A]#{criterion}: )\d+(?=(\n|(\.)?\Z))/).to_i
+  end
+
   def update_with(params)
     self.update_attributes(name: params['name'],
                           role: params['role'],

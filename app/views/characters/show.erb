@@ -22,10 +22,6 @@
     <div class="col-md-2">
       <b>Race:</b> <%= @character.race.name %>
     </div>
-    <div class="col-md-3">
-      <b>Base Level, Class:</b> <%= @character.base_level %>,
-        <%= @character.base_class.name %>
-    </div>
   </div>
 
   <div class="row">
@@ -35,6 +31,8 @@
   </div>
 
   <div class="row">
+
+    <%#= Stats %>
     <div class="col-md-2">
       <p><b>Stats:</b></p>
       <table class="table table-striped table-condensed">
@@ -52,17 +50,44 @@
       )</p>
     </div>
 
-    <div class="col-md-4">
-      <p><b>Prestige Classes:</b></p>
-      <%# if @character.prestige_classes.any? do |p_c| %>
-
-      <%# else %>
-        <p>
-          <em>
-            <%=@character.name%> doesn't have any levels in prestige classes.
-          </em>
-        </p>
-      <%# end %>
+    <div class="col-md-8">
+      <p><b>Class levels:</b></p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <tr>
+            <th class="text-right">Level</th>
+            <th class="col-md-2 text-center">Name</th>
+            <th class="col-md-1 text-center">Role</th>
+            <th class="col-md-2 text-center">Armor Type</th>
+            <th class="col-md-8">Flavor Text</th>
+          </tr>
+          <tr>
+            <td class="text-right"><b><%= @character.base_level %></b></td>
+            <td class="col-md-2 text-center">
+              <b><a href="/base_classes/<%= @character.base_class_id %>">
+                <%= @character.base_class.name %></a>
+                (Base)</b>
+            </td>
+            <td class="col-md-1 text-center"><%= @character.base_class.role %></td>
+            <td class="col-md-2 text-center"><%= @character.base_class.armor_type %></td>
+            <td class="col-md-8"><em><%= @character.base_class.flavor_text %><em></td>
+          </tr>
+          <% @prestige_levels.each do |p_level| %>
+            <% p_class = p_level.prestige_class %>
+            <tr>
+              <td class="text-right"><%= p_level.levels %></td>
+              <td class="col-md-2 text-center">
+                <a href="/prestige_classes/<%= p_class.id %>">
+                  <%= p_class.name %>
+                </a>
+              </td>
+              <td class="col-md-1 text-center"><%= p_class.role %></td>
+              <td class="col-md-2 text-center"><%= p_class.armor_type %></td>
+              <td class="col-md-8"><em><%= p_class.flavor_text %></em></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 

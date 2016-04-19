@@ -30,6 +30,7 @@ end
 
 get "/characters/:id" do
   @character = Character.find_by_id(params['id'])
+  @prestige_levels = @character.prestige_levels
   @character ? @page_name = "Characters: #{@character.name}" : redirect("/characters/error")
   erb :"characters/show"
 end
