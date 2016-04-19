@@ -16,9 +16,10 @@ end
 
 post "/characters/new" do
   @page_name = "New Character"
-  @character = Character.new(params)
+  @character = Character.new.new_with(params)
   @base_classes = BaseClass.all.order(:name)
   @races = Race.all.order(:name)
+  binding.pry
   @character.save ? redirect("/characters") : (erb :"characters/new")
 end
 

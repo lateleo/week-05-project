@@ -5,5 +5,86 @@
 
   <h1><%= @character.name %></h1>
 
+  <%#= Backstory %>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        <em><%= @character.backstory %></em>
+      </p>
+    </div>
+  </div>
+
+  <%#= Role and Stat Indices %>
+  <div class="row">
+    <div class="col-md-2">
+      <b>Age:</b> <%= @character.age %>
+    </div>
+    <div class="col-md-2">
+      <b>Race:</b> <%= @character.race.name %>
+    </div>
+    <div class="col-md-3">
+      <b>Base Level, Class:</b> <%= @character.base_level %>,
+        <%= @character.base_class.name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p> </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <p><b>Stats:</b></p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <% @character.stats.each do |key, stat| %>
+            <tr>
+              <td><%= key %>:</td>
+              <td class="text-right"><%= @character.send(stat) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <p>(
+        <a href="/characters/<%=@character.id%>/edit">Edit Info</a>
+      )</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><b>Prestige Classes:</b></p>
+      <%# if @character.prestige_classes.any? do |p_c| %>
+
+      <%# else %>
+        <p>
+          <em>
+            <%=@character.name%> doesn't have any levels in prestige classes.
+          </em>
+        </p>
+      <%# end %>
+    </div>
+  </div>
+
+  <%#= Abilities %>
+  <div class="row">
+    <div class="col-md-10">
+      <p><b>Abilities:</b></p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <% @character.abilities.each do |ability| %>
+            <tr>
+              <td>
+                <a href="/abilities/<%= ability.id %>">
+                  <%= ability.name %>
+                </a>
+              </td>
+              <td><%= ability.in_game_effect %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>

@@ -61,7 +61,7 @@
             <div class="form-group">
               <label for="race_id">Race:</label>
               <select name="race_id" id="race_id" class="form-control">
-                <option selected disabled value="0">Choose One:</option>
+                <option selected disabled>Choose One:</option>
                 <% @races.each do |race| %>
                   <% race.id == @character.race_id ?
                     selected = "selected" : selected = "" %>
@@ -74,7 +74,7 @@
               <label for="base_class_id">Class:</label>
               <select name="base_class_id" id="base_class_id",
                 class="form-control">
-                <option selected disabled value="0">Choose One:</option>
+                <option selected disabled>Choose One:</option>
                 <% @base_classes.each do |base_class| %>
                   <% base_class.id == @character.base_class_id ?
                     selected = "selected" : selected = "" %>
@@ -101,7 +101,6 @@
         <%#= Submit Button %>
         <div class="row">
           <div class="col-md-12">
-            <input type="hidden" name="base_level" value="1">
             <input type="submit" class="btn btn-default",
               value="Create New Character">
           </div>

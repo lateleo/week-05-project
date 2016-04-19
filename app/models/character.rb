@@ -46,7 +46,7 @@ class Character < ActiveRecord::Base
   end
 
   def validate_age
-    if age < race.age_of_adulthood
+    if Race.find_by_id(race_id).age_of_adulthood > age
       errors.add(:age, "of #{race.name} must be greater than or equal to #{race.age_of_adulthood}.")
     end
   end
@@ -57,6 +57,24 @@ class Character < ActiveRecord::Base
               "Agility" => "agility",
               "Spell Power" => "spell_power",
               "Wit" => "wit"}
+  end
+
+  def new_with(params)
+    self.name = params['name']
+    self.age = params['age']
+    self.race_id = params['race_id']
+    self.base_class_id = params['base_class_id']
+    self.base_level = 1
+    self.racial_ability_id = params['racial_ability_id']
+    self.abilities << Ability.find_by_id(params['ability_id1']) if !abilities.include?(Ability.find_by_id(params['ability_id1']))
+    self.abilities << Ability.find_by_id(params['ability_id2']) if !abilities.include?(Ability.find_by_id(params['ability_id2']))
+    self.stamina = params['stamina']
+    self.strength = params['strength']
+    self.agility = params['agility']
+    self.spell_power = params['spell_power']
+    self.wit = params['wit']
+    self.backstory = params['backstory']
+    self
   end
 
 end
