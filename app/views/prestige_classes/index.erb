@@ -1,33 +1,32 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <b>Prestige Classes</b>
 
-  <h1>Prestige Class Index</h1>
+<a href="/">DnPnZ Home</a> >
+  <b>Prestige Classes</b>
 
-  <p>
-    <% if @prestige_classes.any? %>
-      <div class="row">
-        <div class="col-md-8">
-          <table class="table table-striped table-condensed">
-            <tbody>
-              <% @prestige_classes.each do |prestige_class| %>
-                <tr>
-                  <td>
-                    <a href="/prestige_classes/<%= prestige_class.id %>">
-                      <%= prestige_class.name %>
-                    </a>
-                  </td>
-                  <td><%= prestige_class.flavor_text %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+<h1>Prestige Class Index</h1>
+
+<p>
+  <% if @prestige_classes.any? %>
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @prestige_classes.each do |prestige_class| %>
+              <tr>
+                <td>
+                  <a href="/prestige_classes/<%= prestige_class.id %>">
+                    <%= prestige_class.name %>
+                  </a>
+                </td>
+                <td><%= prestige_class.flavor_text %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-    <% else %>
-      <em>(No Prestige Classes have been created.)</em>
-    <% end %>
-  </p>
+    </div>
+  <% else %>
+    <em>(No Prestige Classes have been created.)</em>
+  <% end %>
+</p>
 
-  <a href="/prestige_classes/new">New Prestige Class</a>
-</div>
+<a href="/prestige_classes/new">New Prestige Class</a>

@@ -1,34 +1,32 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <a href="/races">Races</a> >
-      <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
-        <b><%= @racial_ability.name %></b>
 
-  <h1><%= @racial_ability.name %></h1>
+<a href="/">DnPnZ Home</a> >
+  <a href="/races">Races</a> >
+    <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
+      <b><%= @racial_ability.name %></b>
 
-  <p><b>Cooldown:</b> <%= @racial_ability.cooldown %></p>
+<h1><%= @racial_ability.name %></h1>
 
-  <div class="row">
-    <div class="col-md-6">
-      <p>
-        <b>In-Game Effect:</b></br>
-        <%= @racial_ability.in_game_effect %>
-      </p>
-    </div>
+<p><b>Cooldown:</b> <%= @racial_ability.cooldown %></p>
+
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      <b>In-Game Effect:</b></br>
+      <%= @racial_ability.in_game_effect %>
+    </p>
   </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <p>
-        <b>Flavor Text:</b></br>
-        <em><%= @racial_ability.flavor_text %></em>
-      </p>
-    </div>
-  </div>
-
-  <p>
-    ( <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit">
-    Edit Info</a> )
-  </p>
-
 </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      <b>Flavor Text:</b></br>
+      <em><%= @racial_ability.flavor_text %></em>
+    </p>
+  </div>
+</div>
+
+<p>
+  ( <a href="/races/<%= @race.id %>/abilities/<%= @racial_ability.url_name %>/edit">
+  Edit Info</a> )
+</p>

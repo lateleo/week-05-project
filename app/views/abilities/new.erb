@@ -1,57 +1,54 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <a href="/abilities">Abilities</a> >
-      <b>New</b>
+<a href="/">DnPnZ Home</a> >
+  <a href="/abilities">Abilities</a> >
+    <b>New</b>
 
-  <h1>New Ability</h1>
+<h1>New Ability</h1>
 
-  <% if @ability.errors.any? %>
-    <p><% @ability.errors.full_messages.each do |m| %>
-      Error: <%= m %></br>
-    <% end %></p>
-  <% end %>
+<% if @ability.errors.any? %>
+  <p><% @ability.errors.full_messages.each do |m| %>
+    Error: <%= m %></br>
+  <% end %></p>
+<% end %>
 
-  <form class="form-horizontal" action="/abilities/new" method="post">
+<form class="form-horizontal" action="/abilities/new" method="post">
 
-    <%#= Name and Cooldown %>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name" class="col-md-4 control-label">Name:</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control" name="name"
-                id="name" value="<%= @ability.name %>">
-          </div>
+  <%#= Name and Cooldown %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name" class="col-md-4 control-label">Name:</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" name="name"
+              id="name" value="<%= @ability.name %>">
         </div>
-        <div class="form-group">
-          <label for="cooldown" class="col-md-4 control-label">Cooldown:</label>
-          <div class="col-md-4">
-            <input type="text" class="form-control" name="cooldown"
-              id="cooldown" value="<%= @ability.cooldown %>">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="cooldown" class="col-md-4 control-label">Cooldown:</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" name="cooldown"
+            id="cooldown" value="<%= @ability.cooldown %>">
         </div>
       </div>
     </div>
+  </div>
 
-    <%#= In-Game Effect and Flavor Text %>
-    <div class="row">
-      <div class="col-md-6">
-        <p><b>In-Game Effect:</b>
-        <textarea name="in_game_effect" class="form-control",
-          rows="8"><%= @ability.in_game_effect %></textarea></p>
-        <p><b>Flavor Text:</b>
-        <textarea name="flavor_text" class="form-control",
-          rows="8"><%= @ability.flavor_text %></textarea></p>
-      </div>
+  <%#= In-Game Effect and Flavor Text %>
+  <div class="row">
+    <div class="col-md-6">
+      <p><b>In-Game Effect:</b>
+      <textarea name="in_game_effect" class="form-control",
+        rows="8"><%= @ability.in_game_effect %></textarea></p>
+      <p><b>Flavor Text:</b>
+      <textarea name="flavor_text" class="form-control",
+        rows="8"><%= @ability.flavor_text %></textarea></p>
     </div>
+  </div>
 
-    <%#= Submit Button %>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="submit" value="Enter New Ability" class="btn btn-default">
-      </div>
+  <%#= Submit Button %>
+  <div class="row">
+    <div class="col-md-6">
+      <input type="submit" value="Enter New Ability" class="btn btn-default">
     </div>
+  </div>
 
-  </form>
-
-</div>
+</form>

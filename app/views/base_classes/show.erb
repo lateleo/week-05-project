@@ -1,76 +1,74 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <a href="/base_classes">Base Classes</a> >
-      <b><%= @base_class.name %></b>
 
-  <h1><%= @base_class.name %></h1>
+<a href="/">DnPnZ Home</a> >
+  <a href="/base_classes">Base Classes</a> >
+    <b><%= @base_class.name %></b>
 
-  <%#= Flavor Text %>
-  <div class="row">
-    <div class="col-md-6">
-      <p>
-        <em><%= @base_class.flavor_text %></em>
-      </p>
-    </div>
+<h1><%= @base_class.name %></h1>
+
+<%#= Flavor Text %>
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      <em><%= @base_class.flavor_text %></em>
+    </p>
   </div>
+</div>
 
-  <%#= Role, Armor Type and Stat Indices %>
-  <div class="row">
-    <div class="col-md-2">
-      <p><b>Role:</b> <%= @base_class.role %></p>
-      <p><b>Armor Type:</b> <%= @base_class.armor_type %></p>
-      <p><b>Stat Indices:</b></p>
+<%#= Role, Armor Type and Stat Indices %>
+<div class="row">
+  <div class="col-md-2">
+    <p><b>Role:</b> <%= @base_class.role %></p>
+    <p><b>Armor Type:</b> <%= @base_class.armor_type %></p>
+    <p><b>Stat Indices:</b></p>
+    <table class="table table-striped table-condensed">
+      <tbody>
+        <% @base_class.indices.each do |stat, index| %>
+          <tr>
+            <td><%= stat %>:</td>
+            <td class="text-right"><%= @base_class.send(index) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <p>( <a href="/base_classes/<%=@base_class.id%>/edit">Edit Info</a> )</p>
+  </div>
+</div>
+
+<%#= Abilities %>
+<div class="row">
+  <div class="col-md-8">
+    <p>
+      <b>Abilities (</b>
+      <a href="/base_classes/<%= @base_class.id %>/add_abilities">
+        Add</a> /
+      <a href="/base_classes/<%= @base_class.id %>/remove_abilities">
+        Remove</a>
+      <b>):</b>
+    </p>
+    <% if @abilities.any? %>
       <table class="table table-striped table-condensed">
         <tbody>
-          <% @base_class.indices.each do |stat, index| %>
+          <% @abilities.each do |ability| %>
             <tr>
-              <td><%= stat %>:</td>
-              <td class="text-right"><%= @base_class.send(index) %></td>
+              <td class="col-md-2">
+                <a href="/abilities/<%= ability.id %>">
+                  <%= ability.name %>
+                </a>
+              </td>
+              <td><%= ability.in_game_effect %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-2">
-      <p>( <a href="/base_classes/<%=@base_class.id%>/edit">Edit Info</a> )</p>
-    </div>
-  </div>
-
-  <%#= Abilities %>
-  <div class="row">
-    <div class="col-md-8">
+    <% else %>
       <p>
-        <b>Abilities (</b>
-        <a href="/base_classes/<%= @base_class.id %>/add_abilities">
-          Add</a> /
-        <a href="/base_classes/<%= @base_class.id %>/remove_abilities">
-          Remove</a>
-        <b>):</b>
+        <em>There are no abilites available for <%= @base_class.name %>.</em>
       </p>
-      <% if @abilities.any? %>
-        <table class="table table-striped table-condensed">
-          <tbody>
-            <% @abilities.each do |ability| %>
-              <tr>
-                <td class="col-md-2">
-                  <a href="/abilities/<%= ability.id %>">
-                    <%= ability.name %>
-                  </a>
-                </td>
-                <td><%= ability.in_game_effect %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        <p>
-          <em>There are no abilites available for <%= @base_class.name %>.</em>
-        </p>
-      <% end %>
-    </div>
+    <% end %>
   </div>
-
 </div>

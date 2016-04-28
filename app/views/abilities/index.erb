@@ -1,37 +1,35 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <b>Abilies</b>
 
-  <h1>Abilities</h1>
+<a href="/">DnPnZ Home</a> >
+  <b>Abilies</b>
 
-  <div class="row">
-    <div class="col-md-10">
-      <% if @abilities.any? %>
-        <p>
-          <a href="/abilities/new">New Ability</a>
-        </p>
-        <table class="table table-striped table-condensed">
-          <tbody>
-            <% @abilities.each do |ability| %>
-              <tr>
-                <td>
-                  <a href="/abilities/<%= ability.id %>">
-                    <%= ability.name %>
-                  </a>
-                </td>
-                <td><%= ability.in_game_effect %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        <p>
-          <em>(No abilities have been created.
-            <a href="/abilities/new">Enter New Ability Here</a>.)
-          </em>
-        </p>
-      <% end %>
-    </div>
+<h1>Abilities</h1>
+
+<div class="row">
+  <div class="col-md-10">
+    <% if @abilities.any? %>
+      <p>
+        <a href="/abilities/new">New Ability</a>
+      </p>
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <% @abilities.each do |ability| %>
+            <tr>
+              <td>
+                <a href="/abilities/<%= ability.id %>">
+                  <%= ability.name %>
+                </a>
+              </td>
+              <td><%= ability.in_game_effect %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>
+        <em>(No abilities have been created.
+          <a href="/abilities/new">Enter New Ability Here</a>.)
+        </em>
+      </p>
+    <% end %>
   </div>
-
 </div>

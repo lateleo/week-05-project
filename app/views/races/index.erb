@@ -1,33 +1,32 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <b>Races</b>
 
-  <h1>Races</h1>
+<a href="/">DnPnZ Home</a> >
+  <b>Races</b>
 
-  <p>
-    <% if @races.any? %>
-      <div class="row">
-        <div class="col-md-8">
-          <table class="table table-striped table-condensed">
-            <tbody>
-              <% @races.each do |race| %>
-                <tr>
-                  <td>
-                    <a href="/races/<%= race.id %>">
-                      <%= race.name %>
-                    </a>
-                  </td>
-                  <td><%= race.flavor_text %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+<h1>Races</h1>
+
+<p>
+  <% if @races.any? %>
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table table-striped table-condensed">
+          <tbody>
+            <% @races.each do |race| %>
+              <tr>
+                <td>
+                  <a href="/races/<%= race.id %>">
+                    <%= race.name %>
+                  </a>
+                </td>
+                <td><%= race.flavor_text %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-    <% else %>
-      <em>(No races have been created.)</em>
-    <% end %>
-  </p>
+    </div>
+  <% else %>
+    <em>(No races have been created.)</em>
+  <% end %>
+</p>
 
-  <a href="/races/new">New Race</a>
-</div>
+<a href="/races/new">New Race</a>

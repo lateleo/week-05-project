@@ -1,71 +1,69 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <a href="/races">Races</a> >
-      <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
-        <a href="/races/<%=@race.id %>/abilities/<%= @racial_ability.url_name%>">
-        <%= RacialAbility.find_by_id(@racial_ability.id).name %></a> >
-          <b>Edit</b>
 
-  <h1><%= RacialAbility.find_by_id(@racial_ability.id).name %> - Edit Info</h1>
+<a href="/">DnPnZ Home</a> >
+  <a href="/races">Races</a> >
+    <a href="/races/<%= @race.id%>"><%= @race.name %></a> >
+      <a href="/races/<%=@race.id %>/abilities/<%= @racial_ability.url_name%>">
+      <%= RacialAbility.find_by_id(@racial_ability.id).name %></a> >
+        <b>Edit</b>
 
-  <% if @racial_ability.errors.any? %>
-    <p><% @racial_ability.errors.full_messages.each do |m| %>
-      Error: <%= m %></br>
-    <% end %></p>
-  <% end %>
+<h1><%= RacialAbility.find_by_id(@racial_ability.id).name %> - Edit Info</h1>
 
-  <form class="form-horizontal", method="post",
-    action="/races/<%=@race.id%>/abilities/<%=@racial_ability.url_name%>/edit">
+<% if @racial_ability.errors.any? %>
+  <p><% @racial_ability.errors.full_messages.each do |m| %>
+    Error: <%= m %></br>
+  <% end %></p>
+<% end %>
 
-    <%#= Name and Cooldown %>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="name" class="col-md-4 control-label">Name:</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control" name="name"
-                id="name" value="<%= @racial_ability.name %>">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="cooldown" class="col-md-4 control-label">Cooldown:
-          </label>
-          <div class="col-md-4">
-            <input type="text" class="form-control" name="cooldown"
-              id="cooldown" value="<%= @racial_ability.cooldown %>">
-          </div>
+<form class="form-horizontal", method="post",
+  action="/races/<%=@race.id%>/abilities/<%=@racial_ability.url_name%>/edit">
+
+  <%#= Name and Cooldown %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name" class="col-md-4 control-label">Name:</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" name="name"
+              id="name" value="<%= @racial_ability.name %>">
         </div>
       </div>
-    </div>
-
-    <%#= In-Game Effect and Flavor Text %>
-    <div class="row">
-      <div class="col-md-6">
-        <p><b>In-Game Effect:</b>
-        <textarea name="in_game_effect" class="form-control"
-          rows="8"><%= @racial_ability.in_game_effect %></textarea></p>
-        <p><b>Flavor Text:</b>
-        <textarea name="flavor_text" class="form-control"
-          rows="8"><%= @racial_ability.flavor_text %></textarea></p>
+      <div class="form-group">
+        <label for="cooldown" class="col-md-4 control-label">Cooldown:
+        </label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" name="cooldown"
+            id="cooldown" value="<%= @racial_ability.cooldown %>">
+        </div>
       </div>
     </div>
+  </div>
 
-    <%#= Submit Button %>
-    <div class="row">
-      <div class="col-md-5">
-        <input type="hidden" name="_method" value="patch">
-        <input type="submit" class="btn btn-default",
-          value="Update <%=RacialAbility.find_by_id(@racial_ability.id).name%>">
-        </form>
-      </div>
+  <%#= In-Game Effect and Flavor Text %>
+  <div class="row">
+    <div class="col-md-6">
+      <p><b>In-Game Effect:</b>
+      <textarea name="in_game_effect" class="form-control"
+        rows="8"><%= @racial_ability.in_game_effect %></textarea></p>
+      <p><b>Flavor Text:</b>
+      <textarea name="flavor_text" class="form-control"
+        rows="8"><%= @racial_ability.flavor_text %></textarea></p>
+    </div>
+  </div>
 
-      <div class="col-md-1">
-        <form class="form", method="post",
-          action="/races/<%=@race.id%>/abilities/<%=@racial_ability.url_name%>/delete">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" class="btn btn-default" value="Delete">
-        </form>
-      </div>
+  <%#= Submit Button %>
+  <div class="row">
+    <div class="col-md-5">
+      <input type="hidden" name="_method" value="patch">
+      <input type="submit" class="btn btn-default",
+        value="Update <%=RacialAbility.find_by_id(@racial_ability.id).name%>">
+      </form>
     </div>
 
-</div>
+    <div class="col-md-1">
+      <form class="form", method="post",
+        action="/races/<%=@race.id%>/abilities/<%=@racial_ability.url_name%>/delete">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" class="btn btn-default" value="Delete">
+      </form>
+    </div>
+  </div>

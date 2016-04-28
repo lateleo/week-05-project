@@ -1,11 +1,8 @@
-<div class="container">
-  <a href="/">DnPnZ Home</a> >
-    <a href="/characters">Characters</a> >
-      <a href="/characters/<%= @character.id %>">
-      <%= Character.find_by_id(@character.id).name %></a> >
-        <b>Edit</b>
 
-  <h1><%= @character.name %></h1>
+<a href="/">DnPnZ Home</a> >
+  <a href="/characters">Characters</a> >
+    <a href="/characters/<%= @character.id %>">
+    <%= Character.find_by_id(@character.id).name %></a> >
+      <b>Edit</b>
 
-
-</div>
+<h1><%= @character.name %></h1>
