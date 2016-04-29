@@ -1,4 +1,4 @@
-
+<script src="/js/newCharacter.js"></script>
 <a href="/">DnPnZ Home</a> >
   <a href="/characters">Characters</a> >
     <b>New</b>
@@ -14,20 +14,20 @@
 <form class="form-horizontal" action="/characters/new" method="post">
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <%#= Name and Age%>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <div class="form-group">
-            <label for="name" class="col-md-4 control-label">Name:</label>
-            <div class="col-md-8">
+            <label for="name" class="col-xs-4 control-label">Name:</label>
+            <div class="col-xs-8">
               <input type="text" class="form-control" name="name",
                   id="name" value="<%= @character.name %>">
             </div>
           </div>
           <div class="form-group">
-            <label for="age" class="col-md-4 control-label">Age:</label>
-            <div class="col-md-2">
+            <label for="age" class="col-xs-4 control-label">Age:</label>
+            <div class="col-xs-2">
               <input type="text" class="form-control" name="age",
                 id="age" value="<%= @character.age %>">
             </div>
@@ -38,7 +38,7 @@
       <div class="row">
 
         <%#= Stats %>
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <p><b>Stats:</b></p>
           <table class="table table-striped table-condensed">
             <tbody>
@@ -56,11 +56,11 @@
         </div>
 
         <%#= Class and Race %>
-        <div class="col-md-4 col-md-offset-2">
+        <div class="col-xs-4 col-xs-offset-2">
 
           <div class="form-group">
             <label for="race_id">Race:</label>
-            <select name="race_id" id="race_id" class="form-control">
+            <select name="race_id" id="raceSelect" class="form-control">
               <option selected disabled>Choose One:</option>
               <% @races.each do |race| %>
                 <% race.id == @character.race_id ?
@@ -72,7 +72,7 @@
           </div>
           <div class="form-group">
             <label for="base_class_id">Class:</label>
-            <select name="base_class_id" id="base_class_id",
+            <select name="base_class_id" id="baseClassSelect",
               class="form-control">
               <option selected disabled>Choose One:</option>
               <% @base_classes.each do |base_class| %>
@@ -89,7 +89,7 @@
 
       <%#= Backstory %>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <p>
             <b>Backstory:</b>
             <textarea name="backstory" class="form-control",
@@ -100,7 +100,7 @@
 
       <%#= Submit Button %>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <input type="submit" class="btn btn-default",
             value="Create New Character">
         </div>
@@ -108,10 +108,10 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-xs-6">
 
       <% @races.each do |race| %>
-        <div style='display:none;' id="<%= race.id %>_racials" class="col-md-12">
+        <div id="<%= race.id %>racials" class="col-xs-12 racials hidden">
           <table class="table table-striped table-condensed">
             <tbody>
               <p><b>Racial Abilities: <%= race.name %></b></p>
@@ -130,42 +130,29 @@
             </tbody>
           </table>
         </div>
-
-
-        <script>
-          $(document).ready(function(){
-            $('#race_id').on('change', function() {
-              if ( this.value == <%= race.id %>)
-                {
-                  $("#<%= race.id %>_racials").show();
-                }
-              else
-                {
-                  $("#<%= race.id %>_racials").hide();
-                }
-            });
-          });
-        </script>
       <% end %>
 
-      <% @base_classes.each do |base_class| %>
-        <div style='display:none;' id="<%= base_class.id %>_abilities",
-          class="col-md-12">
+      <% @base_classes.each do |bc| %>
+        <div id="<%=bc.id%>abilities" class="col-xs-12 abilities hidden">
           <table class="table table-striped table-condensed">
             <tbody>
-              <p><b>Class Abilities: <%= base_class.name %></b></p>
+              <p><b>Class Abilities: <%= bc.name %></b></p>
               <tr>
                 <th>1</th>
                 <th>2</th>
                 <th>Name</th>
                 <th>In-Game Effect</th>
               </tr>
-              <% base_class.abilities.order(:name).each do |a| %>
+              <% bc.abilities.order(:name).each do |a| %>
                 <tr>
-                  <td><input type="radio" name="ability_id1",
-                      value="<%= a.id %>" id="<%=a.id%>a1"></td>
-                  <td><input type="radio" name="ability_id2",
-                      value="<%= a.id %>" id="<%=a.id%>a2"></td>
+                  <td>
+                    <input type="radio" name="ability_id1" value="<%=a.id%>",
+                      class="aRadio aFirst a<%=a.id%>" id="a<%=a.id%>-1">
+                  </td>
+                  <td>
+                    <input type="radio" name="ability_id2" value="<%=a.id%>",
+                      class="aRadio aSecond a<%=a.id%>" id="a<%=a.id%>-2">
+                  </td>
                   <td><%= a.name %></td>
                   <td><%= a.in_game_effect %></td>
                 </tr>
@@ -175,32 +162,6 @@
             </tbody>
           </table>
         </div>
-
-
-        <script>
-          $(document).ready(function(){
-            $('#base_class_id').on('change', function() {
-              if ( this.value == <%= base_class.id %>)
-                {
-                  $("#<%= base_class.id %>_abilities").show();
-                }
-              else
-                {
-                  $("#<%= base_class.id %>_abilities").hide();
-                }
-            });
-          });
-
-          $("input").change(function(){
-            i= $(this).index();
-            sibling =  $(this).parent()
-              .siblings()
-              .find("input")
-              .eq(i);
-            if (sibling.is(":checked"))
-              $(this).removeAttr("checked");
-          });
-        </script>
       <% end %>
 
     </div>
